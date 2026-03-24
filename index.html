@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Complete Photography Masterclass | NEJ</title>
+    <title>The Complete Photography Masterclass | Jay</title>
     <meta
       name="description"
       content="From picking up your first camera to running a profitable photography business in Nigeria. 16 chapters, 60+ real-world examples, 45+ exercises. Enrol for ₦15,000."
@@ -15,14 +15,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    0
     <!-- ═══ HERO ═══ -->
     <section class="hero">
       <div class="hero-bg"></div>
       <div class="hero-inner">
         <div class="badge">
           <div class="badge-line"></div>
-          <span>A NEJ Masterclass</span>
+          <span>A Jay Masterclass</span>
         </div>
         <div class="hero-grid">
           <div class="hero-left">
@@ -44,7 +43,7 @@
             <div class="hero-cta">
               <button
                 class="cta-btn"
-                onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})"
+                onclick="document.getElementById('regForm').scrollIntoView({behavior:'smooth',block:'center'})"
               >
                 Enrol Now &mdash; &#x20A6;15,000
                 <svg
@@ -136,10 +135,10 @@
           <p>
             I did not start photography with a fancy camera or a mentor. I
             started with a secondhand phone, curiosity that would not quit, and
-            the stubborn belief that I could build something from nothing. Port
-            Harcourt taught me that lesson early. Before photography, I was
-            hustling as a student, running a small printing business, learning
-            what it meant to trade hours for survival. The streets were my first
+            the stubborn belief that I could build something from nothing. Lagos
+            taught me that lesson early. Before photography, I was hustling as a
+            dispatch rider, running a small printing business, learning what it
+            meant to trade hours for survival. The streets were my first
             classroom.
           </p>
           <p>Then I picked up a camera. And everything shifted.</p>
@@ -150,9 +149,9 @@
             light the entire hall with two speedlights and sheer willpower. I
             have directed productions where the client changed the brief three
             times on set and we still delivered. I have photographed faces,
-            stories, and moments across Port Harcourt and beyond, building a
-            body of work and a reputation through consistency, quality, and the
-            refusal to deliver anything less than my best.
+            stories, and moments across Lagos and beyond, building a body of
+            work and a reputation through consistency, quality, and the refusal
+            to deliver anything less than my best.
           </p>
           <p>
             But here is what I kept noticing:
@@ -163,7 +162,7 @@
             plan, no idea what their work actually costs them.
           </p>
           <p>
-            So I wrote the guide I wish I had when I started. A complete guide
+            So I wrote the book I wish I had when I started. A complete guide
             from zero to professional, grounded entirely in Nigerian reality.
             Not translated from some American course. Written here, for here.
             With examples from Balogun Market and Oshodi, pricing in Naira,
@@ -202,7 +201,7 @@
           </div>
           <div class="story-tag">
             <div class="tag-dot"></div>
-            Photography, &amp; Business of Photography
+            Photography, Cinematography &amp; Production
           </div>
           <div class="story-tag">
             <div class="tag-dot"></div>
@@ -210,7 +209,19 @@
           </div>
           <div class="story-tag">
             <div class="tag-dot"></div>
-            Written Entirely for the African Creative
+            Written Entirely for the Nigerian Market
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ BRANDS ═══ -->
+    <section class="brands-bar">
+      <div class="brands-inner">
+        <p class="brands-label">Trusted by brands including</p>
+        <div class="brands-track">
+          <div class="brands-logos" id="brandLogos">
+            <!-- JS will populate these. Replace with your real brand names/logos -->
           </div>
         </div>
       </div>
@@ -232,16 +243,16 @@
           </div>
           <h2 class="section-title center">16 Chapters. Zero Fluff.</h2>
           <p class="section-sub">
-            Every chapter is packed with real Nigerian examples relatable to you
-            and hands-on exercises you can practise immediately. This is the
-            exact content from the 24,000+ word course book.
+            Every chapter is packed with real Nigerian examples and hands-on
+            exercises you can practise immediately. This is the exact content
+            from the 24,000+ word course book.
           </p>
         </div>
         <div id="modulesContainer"></div>
         <div class="center" style="margin-top: 48px">
           <button
             class="cta-btn"
-            onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})"
+            onclick="document.getElementById('regForm').scrollIntoView({behavior:'smooth',block:'center'})"
           >
             Get Instant Access &mdash; &#x20A6;15,000
             <svg
@@ -301,7 +312,7 @@
       </div>
     </section>
 
-    <!-- ═══ PRICING ═══ -->
+    <!-- ═══ PRICING + REGISTRATION ═══ -->
     <section class="pricing anim-section" id="pricing">
       <div class="pricing-inner">
         <span class="section-label">Enrol Today</span>
@@ -315,22 +326,132 @@
             </div>
           </div>
           <div class="price-features" id="priceFeatures"></div>
-          <button
-            class="cta-btn full-width"
-            onclick="window.location.href='https://selar.com/774o60z416'"
-          >
-            Enrol! &mdash; &#x20A6;15,000
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
+
+          <!-- ═══ REGISTRATION FORM ═══ -->
+          <div class="reg-form-wrapper" id="regForm">
+            <div class="reg-form-header">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#C8A24E"
+                stroke-width="2"
+              >
+                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2" />
+                <circle cx="8.5" cy="7" r="4" />
+                <line x1="20" y1="8" x2="20" y2="14" />
+                <line x1="23" y1="11" x2="17" y2="11" />
+              </svg>
+              <span>Register for the Masterclass!!!</span>
+            </div>
+
+            <div class="reg-fields">
+              <div class="reg-row">
+                <div class="reg-field">
+                  <label for="regFirst">First Name</label>
+                  <input
+                    type="text"
+                    id="regFirst"
+                    placeholder="e.g. Chinedu"
+                    autocomplete="given-name"
+                  />
+                </div>
+                <div class="reg-field">
+                  <label for="regLast">Last Name</label>
+                  <input
+                    type="text"
+                    id="regLast"
+                    placeholder="e.g. Okafor"
+                    autocomplete="family-name"
+                  />
+                </div>
+              </div>
+              <div class="reg-field">
+                <label for="regEmail">Email Address</label>
+                <input
+                  type="email"
+                  id="regEmail"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+              </div>
+              <div class="reg-field">
+                <label for="regPhone">WhatsApp / Phone Number</label>
+                <input
+                  type="tel"
+                  id="regPhone"
+                  placeholder="e.g. 08012345678"
+                  autocomplete="tel"
+                />
+              </div>
+              <div class="reg-field">
+                <label for="regLevel">Your Level</label>
+                <select id="regLevel">
+                  <option value="" disabled selected>
+                    Select your current level
+                  </option>
+                  <option value="complete_beginner">
+                    Complete Beginner (never used a camera professionally)
+                  </option>
+                  <option value="beginner">
+                    Beginner (I shoot but I am still learning basics)
+                  </option>
+                  <option value="intermediate">
+                    Intermediate (I take paid jobs but want to improve)
+                  </option>
+                  <option value="advanced">
+                    Advanced (I want business and scaling strategies)
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              class="cta-btn full-width"
+              id="regSubmitBtn"
+              onclick="handleRegistration()"
             >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </button>
+              Reserve My Spot &mdash; &#x20A6;15,000
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            <p class="reg-note">
+              Your information is secure. We will send course access details to
+              your email and WhatsApp after payment.
+            </p>
+
+            <!-- Success state (hidden by default) -->
+            <div class="reg-success" id="regSuccess" style="display: none">
+              <div class="reg-success-icon">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#C8A24E"
+                  stroke-width="2.5"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <h3>You are in!</h3>
+              <p>
+                Thank you for registering. Check your email and WhatsApp for
+                next steps and payment instructions.
+              </p>
+            </div>
+          </div>
+
           <p class="price-secure">
             Secure payment via Paystack, Flutterwave, or bank transfer. Instant
             access after payment.
@@ -381,6 +502,54 @@
             Lifetime Updates
           </div>
         </div>
+
+        <!-- ═══ EBOOK ONLY CTA ═══ -->
+        <div class="ebook-cta">
+          <div class="ebook-cta-inner">
+            <div class="ebook-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#C8A24E"
+                stroke-width="1.5"
+              >
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                <path
+                  d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"
+                />
+                <line x1="9" y1="7" x2="16" y2="7" />
+                <line x1="9" y1="11" x2="14" y2="11" />
+              </svg>
+            </div>
+            <div class="ebook-text">
+              <p class="ebook-heading">Just want the eBook?</p>
+              <p class="ebook-desc">
+                Get the complete 16-chapter, 24,000+ word Photography
+                Masterclass as a downloadable eBook. Same content, read at your
+                own pace.
+              </p>
+            </div>
+            <a
+              href="#"
+              class="ebook-btn"
+              onclick="window.open('https://selar.co/your-ebook-link','_blank'); return false;"
+            >
+              Buy eBook &mdash; &#x20A6;10,000
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M7 17L17 7M17 7H7M17 7v10" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -411,7 +580,7 @@
         </p>
         <button
           class="cta-btn"
-          onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})"
+          onclick="document.getElementById('regForm').scrollIntoView({behavior:'smooth',block:'center'})"
         >
           Start Your Journey &mdash; &#x20A6;15,000
           <svg
@@ -431,7 +600,7 @@
       </div>
       <div class="footer">
         <p>
-          &copy; 2026 NEJ &mdash; THE COMPLETE PHOTOGRAPHY MASTERCLASS &mdash;
+          &copy; 2026 JAY &mdash; THE COMPLETE PHOTOGRAPHY MASTERCLASS &mdash;
           ALL RIGHTS RESERVED
         </p>
       </div>
