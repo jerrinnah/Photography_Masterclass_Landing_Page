@@ -327,6 +327,42 @@ body {
   background: #c8a24e;
 }
 
+/* ═══ INSTAGRAM SHOWCASE ═══ */
+.ig-showcase { margin: 32px 0 36px; }
+.ig-showcase-label { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+.ig-showcase-label span { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #c8a24e; font-weight: 600; }
+.ig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.ig-profile-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px; background: #0c0c0c; border: 1px solid #1a1a1a; border-radius: 4px;
+  text-decoration: none; transition: all 0.35s ease; position: relative; overflow: hidden;
+}
+.ig-profile-card::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(135deg, rgba(131,58,180,0.08), rgba(253,29,29,0.06), rgba(252,176,69,0.06));
+  transition: opacity 0.35s ease;
+}
+.ig-profile-card:hover { border-color: #333; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.ig-profile-card:hover::before { opacity: 1; }
+.ig-card-icon {
+  flex-shrink: 0; position: relative; z-index: 1;
+  width: 44px; height: 44px; border-radius: 10px;
+  background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045);
+  display: flex; align-items: center; justify-content: center;
+}
+.ig-card-info { flex: 1; position: relative; z-index: 1; min-width: 0; }
+.ig-card-handle { display: block; font-size: 15px; font-weight: 600; color: #f5f0eb; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ig-card-desc { display: block; font-size: 12px; color: #666; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ig-card-arrow { flex-shrink: 0; position: relative; z-index: 1; opacity: 0; transform: translateX(-4px); transition: all 0.3s ease; }
+.ig-profile-card:hover .ig-card-arrow { opacity: 1; transform: translateX(0); }
+@media (max-width: 768px) {
+  .ig-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 769px) and (max-width: 900px) {
+  .ig-grid { grid-template-columns: 1fr 1fr; }
+  .ig-profile-card:nth-child(3) { grid-column: 1 / -1; max-width: 50%; }
+}
+
 /* ═══ BRANDS BAR ═══ */
 .brands-bar {
   padding: 48px 24px;
