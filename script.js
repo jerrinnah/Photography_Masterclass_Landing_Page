@@ -675,10 +675,13 @@ function handleRegistration() {
   // existing.push(registrationData);
   // localStorage.setItem('masterclass_registrations', JSON.stringify(existing));
 
-  fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", {
-    method: "POST",
-    body: JSON.stringify(registrationData),
-  });
+  fetch(
+    "https://script.google.com/macros/s/AKfycbynRugjw_1ryCl7iX126vg4VBqQ2_i7IMknKFZYLhCvH0rVXMn6pxFhBYY6UYmYtakS/exec",
+    {
+      method: "POST",
+      body: JSON.stringify(registrationData),
+    }
+  );
 
   // Log to console (you can see all registrations in browser dev tools)
   console.log("New registration:", registrationData);
