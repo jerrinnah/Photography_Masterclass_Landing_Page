@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Account | Jay Masterclass</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '517290012136807');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"/></noscript>
+    <!-- End Facebook Pixel -->
+    <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: #0a0a0a;
+        color: #f5f0eb;
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+      .card {
+        background: #111;
+        border: 1px solid #1e1e1e;
+        border-radius: 16px;
+        padding: 48px 40px;
+        width: 100%;
+        max-width: 460px;
+      }
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        color: #c8a24e;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .tagline {
+        font-size: 13px;
+        color: #555;
+        text-align: center;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 36px;
+      }
+      .step-label {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #c8a24e;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 26px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .subtitle {
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        margin-bottom: 32px;
+        line-height: 1.6;
+      }
+      .verifying-state {
+        text-align: center;
+        padding: 20px 0;
+      }
+      .spinner {
+        width: 36px;
+        height: 36px;
+        border: 3px solid #1e1e1e;
+        border-top-color: #c8a24e;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 16px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .verifying-state p { color: #666; font-size: 14px; }
+      .form-group { margin-bottom: 20px; }
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      .user-email-display {
+        background: #161616;
+        border: 1px solid #1e1e1e;
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 15px;
+        color: #c8a24e;
+        font-weight: 500;
+        width: 100%;
+      }
+      input[type="password"] {
+        width: 100%;
+        background: #161616;
+        border: 1px solid #1e1e1e;
+        border-radius: 10px;
+        padding: 14px 16px;
+        font-size: 15px;
+        color: #f5f0eb;
+        font-family: "DM Sans", sans-serif;
+        transition: border-color 0.2s;
+        outline: none;
+      }
+      input[type="password"]:focus { border-color: #c8a24e; }
+      input[type="password"].error { border-color: #e55; }
+      .hint { font-size: 12px; color: #555; margin-top: 6px; }
+      .error-msg { font-size: 13px; color: #e55; margin-top: 6px; display: none; }
+      .btn {
+        width: 100%;
+        padding: 16px;
+        background: #c8a24e;
+        color: #0a0a0a;
+        border: none;
+        border-radius: 10px;
+        font-family: "DM Sans", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.1s;
+        margin-top: 8px;
+      }
+      .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+      .success-state { display: none; text-align: center; padding: 20px 0; }
+      .success-icon {
+        width: 60px; height: 60px;
+        background: rgba(200,162,78,0.1);
+        border: 2px solid #c8a24e;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 24px;
+      }
+      .success-state h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .success-state p { color: #666; font-size: 14px; margin-bottom: 24px; }
+      .error-state { display: none; text-align: center; padding: 20px 0; }
+      .error-state .error-icon {
+        width: 60px; height: 60px;
+        background: rgba(229,85,85,0.1);
+        border: 2px solid #e55;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 24px;
+      }
+      .error-state h2 { font-family: "Playfair Display", serif; font-size: 20px; margin-bottom: 8px; color: #e55; }
+      .error-state p { color: #666; font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+      .link-btn {
+        display: inline-block;
+        color: #c8a24e;
+        font-size: 14px;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(200,162,78,0.3);
+        transition: border-color 0.2s;
+      }
+      .link-btn:hover { border-color: #c8a24e; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="logo">Jay Masterclass</div>
+      <div class="tagline">The Complete Photography Course</div>
+
+      <!-- Step 1: Verifying payment -->
+      <div id="verifyingState" class="verifying-state">
+        <div class="spinner"></div>
+        <p>Verifying your payment...</p>
+      </div>
+
+      <!-- Step 2: Create password form -->
+      <div id="formState" style="display:none">
+        <div class="step-label">Payment Confirmed ✓</div>
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Set a password to access your course anytime.</p>
+
+        <div class="form-group">
+          <label>Your Email</label>
+          <div class="user-email-display" id="emailDisplay">—</div>
+        </div>
+        <div class="form-group">
+          <label>Create Password</label>
+          <input type="password" id="passwordInput" placeholder="Minimum 8 characters" />
+          <div class="hint">At least 8 characters</div>
+          <div class="error-msg" id="passError"></div>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="confirmInput" placeholder="Re-enter your password" />
+          <div class="error-msg" id="confirmError"></div>
+        </div>
+        <div class="error-msg" id="firebaseError" style="margin-bottom:12px; display:none;"></div>
+        <button class="btn" id="createBtn" onclick="createAccount()">Create Account & Access Course</button>
+      </div>
+
+      <!-- Step 3: Success -->
+      <div id="successState" class="success-state">
+        <div class="success-icon">✓</div>
+        <h2>You're all set!</h2>
+        <p>Your account has been created. Taking you to the course now...</p>
+      </div>
+
+      <!-- Error: payment failed -->
+      <div id="errorState" class="error-state">
+        <div class="error-icon">✗</div>
+        <h2>Payment Not Found</h2>
+        <p>We couldn't verify your payment. If you believe this is a mistake, please contact us with your Paystack receipt.</p>
+        <a href="index.html" class="link-btn">← Back to the course page</a>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+      import firebaseConfig from "./firebase-config.js";
+
+      const app   = initializeApp(firebaseConfig);
+      const auth  = getAuth(app);
+      const db    = getFirestore(app);
+
+      let verifiedEmail = "";
+
+      // ── Verify payment on page load ──
+      const params    = new URLSearchParams(window.location.search);
+      const reference = params.get("reference") || params.get("trxref");
+
+      if (!reference) {
+        showError();
+      } else {
+        fetch(`verify-payment.php?reference=${encodeURIComponent(reference)}`)
+          .then(r => r.json())
+          .then(data => {
+            if (data.status) {
+              verifiedEmail = data.email.trim().toLowerCase();
+              document.getElementById("emailDisplay").textContent = verifiedEmail;
+              document.getElementById("verifyingState").style.display = "none";
+              document.getElementById("formState").style.display = "block";
+              // Track Purchase event
+              if (typeof fbq === "function") fbq("track", "Purchase", { value: data.amount, currency: "NGN" });
+            } else {
+              showError();
+            }
+          })
+          .catch(() => showError());
+      }
+
+      function showError() {
+        document.getElementById("verifyingState").style.display = "none";
+        document.getElementById("errorState").style.display = "block";
+      }
+
+      // ── Create Firebase account ──
+      window.createAccount = async function () {
+        const password = document.getElementById("passwordInput").value;
+        const confirm  = document.getElementById("confirmInput").value;
+        const passErr  = document.getElementById("passError");
+        const confErr  = document.getElementById("confirmError");
+        const fbErr    = document.getElementById("firebaseError");
+        const btn      = document.getElementById("createBtn");
+
+        passErr.style.display = "none";
+        confErr.style.display = "none";
+        fbErr.style.display   = "none";
+        document.getElementById("passwordInput").classList.remove("error");
+        document.getElementById("confirmInput").classList.remove("error");
+
+        let hasError = false;
+        if (password.length < 8) {
+          passErr.textContent = "Password must be at least 8 characters";
+          passErr.style.display = "block";
+          document.getElementById("passwordInput").classList.add("error");
+          hasError = true;
+        }
+        if (password !== confirm) {
+          confErr.textContent = "Passwords do not match";
+          confErr.style.display = "block";
+          document.getElementById("confirmInput").classList.add("error");
+          hasError = true;
+        }
+        if (hasError) return;
+
+        btn.textContent  = "Creating account...";
+        btn.disabled     = true;
+
+        try {
+          const userCred = await createUserWithEmailAndPassword(auth, verifiedEmail, password);
+          // Save to Firestore paid_users collection
+          await setDoc(doc(db, "paid_users", userCred.user.uid), {
+            email:       verifiedEmail,
+            uid:         userCred.user.uid,
+            paid:        true,
+            reference:   reference,
+            createdAt:   serverTimestamp(),
+          });
+
+          document.getElementById("formState").style.display    = "none";
+          document.getElementById("successState").style.display = "block";
+
+          setTimeout(() => { window.location.href = "course.html"; }, 2000);
+
+        } catch (err) {
+          btn.textContent = "Create Account & Access Course";
+          btn.disabled    = false;
+
+          if (err.code === "auth/email-already-in-use") {
+            fbErr.textContent = "An account with this email already exists. Please log in instead.";
+          } else {
+            fbErr.textContent = "Something went wrong. Please try again.";
+          }
+          fbErr.style.display = "block";
+        }
+      };
+    </script>
+  </body>
+</html>

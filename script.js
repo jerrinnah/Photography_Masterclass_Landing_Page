@@ -668,6 +668,9 @@ function handleRegistration() {
     body: JSON.stringify(registrationData),
   })
     .then(() => {
+      // Track Lead conversion in Facebook Pixel
+      if (typeof fbq === "function") fbq("track", "Lead");
+
       // Hide form fields and button
       document.querySelector(".reg-fields").style.display = "none";
       document.querySelector(".reg-form-header").style.display = "none";

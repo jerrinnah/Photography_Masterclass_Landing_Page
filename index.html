@@ -13,8 +13,31 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <!-- Facebook Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '517290012136807');
+      fbq('track', 'PageView');
+    </script>
+    <noscript>
+      <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel -->
   </head>
   <body>
+    <!-- ═══ TOP LOGIN BAR ═══ -->
+    <div style="background:#0d0d0d; border-bottom:1px solid #1a1a1a; padding:10px 24px; display:flex; justify-content:flex-end; align-items:center; gap:10px;">
+      <span style="font-size:13px; color:#555;">Already enrolled?</span>
+      <a href="login.html" style="font-size:13px; color:#c8a24e; text-decoration:none; border:1px solid rgba(200,162,78,0.3); border-radius:8px; padding:6px 16px; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#c8a24e'" onmouseout="this.style.borderColor='rgba(200,162,78,0.3)'">Log In to Course →</a>
+    </div>
     <!-- ═══ HERO ═══ -->
     <section class="hero">
       <div class="hero-bg"></div>
