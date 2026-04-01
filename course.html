@@ -3,25 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Course Portal | Jay Masterclass</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <title>Course Portal | NEJ Masterclass</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Facebook Pixel -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '517290012136807');
-      fbq('track', 'PageView');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "517290012136807");
+      fbq("track", "PageView");
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"/></noscript>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"
+    /></noscript>
     <!-- End Facebook Pixel -->
     <style>
-      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         background: #0a0a0a;
         color: #f5f0eb;
@@ -33,27 +63,40 @@
 
       /* ── Auth loading overlay ── */
       #authOverlay {
-        position: fixed; inset: 0;
+        position: fixed;
+        inset: 0;
         background: #0a0a0a;
-        display: flex; align-items: center; justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         z-index: 999;
       }
       .spinner {
-        width: 40px; height: 40px;
+        width: 40px;
+        height: 40px;
         border: 3px solid #1e1e1e;
         border-top-color: #c8a24e;
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
-      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
       /* ── Top Bar ── */
       .topbar {
-        position: fixed; top: 0; left: 0; right: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
         height: 60px;
         background: #0d0d0d;
         border-bottom: 1px solid #1a1a1a;
-        display: flex; align-items: center; justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 0 24px;
         z-index: 100;
       }
@@ -63,14 +106,20 @@
         color: #c8a24e;
       }
       .topbar-right {
-        display: flex; align-items: center; gap: 16px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
       }
       .user-email {
         font-size: 13px;
         color: #555;
         display: none;
       }
-      @media (min-width: 600px) { .user-email { display: block; } }
+      @media (min-width: 600px) {
+        .user-email {
+          display: block;
+        }
+      }
       .logout-btn {
         font-size: 13px;
         color: #666;
@@ -82,7 +131,10 @@
         font-family: "DM Sans", sans-serif;
         transition: color 0.2s, border-color 0.2s;
       }
-      .logout-btn:hover { color: #f5f0eb; border-color: #333; }
+      .logout-btn:hover {
+        color: #f5f0eb;
+        border-color: #333;
+      }
 
       /* ── Layout ── */
       .layout {
@@ -100,7 +152,8 @@
         height: calc(100vh - 60px);
         overflow-y: auto;
         position: fixed;
-        top: 60px; left: 0;
+        top: 60px;
+        left: 0;
         padding: 24px 0;
         scrollbar-width: thin;
         scrollbar-color: #1e1e1e transparent;
@@ -108,9 +161,13 @@
         transition: transform 0.3s ease;
         z-index: 50;
       }
-      .sidebar.open { transform: translateX(0); }
+      .sidebar.open {
+        transform: translateX(0);
+      }
       @media (min-width: 900px) {
-        .sidebar { transform: translateX(0); }
+        .sidebar {
+          transform: translateX(0);
+        }
       }
       .sidebar-header {
         padding: 0 20px 16px;
@@ -145,10 +202,18 @@
         transition: background 0.15s;
         font-family: "DM Sans", sans-serif;
       }
-      .chapter-btn:hover { background: #151515; }
-      .chapter-btn.active { background: rgba(200,162,78,0.08); }
-      .chapter-btn.active .chapter-num { color: #c8a24e; }
-      .chapter-btn.active .chapter-title { color: #f5f0eb; }
+      .chapter-btn:hover {
+        background: #151515;
+      }
+      .chapter-btn.active {
+        background: rgba(200, 162, 78, 0.08);
+      }
+      .chapter-btn.active .chapter-num {
+        color: #c8a24e;
+      }
+      .chapter-btn.active .chapter-title {
+        color: #f5f0eb;
+      }
       .chapter-num {
         font-size: 13px;
         font-weight: 700;
@@ -172,7 +237,9 @@
         max-width: 100%;
       }
       @media (min-width: 900px) {
-        .main { margin-left: 300px; }
+        .main {
+          margin-left: 300px;
+        }
       }
 
       /* ── Mobile sidebar toggle ── */
@@ -191,17 +258,31 @@
         margin-bottom: 24px;
         transition: color 0.2s, border-color 0.2s;
       }
-      .sidebar-toggle:hover { color: #f5f0eb; border-color: #333; }
-      @media (min-width: 900px) { .sidebar-toggle { display: none; } }
+      .sidebar-toggle:hover {
+        color: #f5f0eb;
+        border-color: #333;
+      }
+      @media (min-width: 900px) {
+        .sidebar-toggle {
+          display: none;
+        }
+      }
       .sidebar-overlay {
         display: none;
-        position: fixed; inset: 0;
-        background: rgba(0,0,0,0.7);
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
         z-index: 40;
         top: 60px;
       }
-      .sidebar-overlay.visible { display: block; }
-      @media (min-width: 900px) { .sidebar-overlay { display: none !important; } }
+      .sidebar-overlay.visible {
+        display: block;
+      }
+      @media (min-width: 900px) {
+        .sidebar-overlay {
+          display: none !important;
+        }
+      }
 
       /* ── Video Player ── */
       .video-wrapper {
@@ -232,14 +313,20 @@
         gap: 12px;
       }
       .video-placeholder .play-icon {
-        width: 64px; height: 64px;
+        width: 64px;
+        height: 64px;
         border: 2px solid #2a2a2a;
         border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 24px;
         color: #333;
       }
-      .video-placeholder p { font-size: 13px; color: #444; }
+      .video-placeholder p {
+        font-size: 13px;
+        color: #444;
+      }
 
       /* ── Chapter Info ── */
       .chapter-meta {
@@ -255,8 +342,8 @@
         text-transform: uppercase;
         color: #c8a24e;
         font-weight: 600;
-        background: rgba(200,162,78,0.08);
-        border: 1px solid rgba(200,162,78,0.15);
+        background: rgba(200, 162, 78, 0.08);
+        border: 1px solid rgba(200, 162, 78, 0.15);
         padding: 4px 10px;
         border-radius: 20px;
       }
@@ -328,21 +415,46 @@
         min-width: 140px;
         max-width: 240px;
       }
-      .nav-btn:hover { border-color: #c8a24e; background: rgba(200,162,78,0.04); }
-      .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-      .nav-btn:disabled:hover { border-color: #1e1e1e; background: #111; }
-      .nav-label { font-size: 11px; color: #555; letter-spacing: 1px; text-transform: uppercase; }
-      .nav-title { font-size: 13px; color: #f5f0eb; font-weight: 500; line-height: 1.3; }
-      .nav-btn.next { text-align: right; margin-left: auto; }
+      .nav-btn:hover {
+        border-color: #c8a24e;
+        background: rgba(200, 162, 78, 0.04);
+      }
+      .nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      .nav-btn:disabled:hover {
+        border-color: #1e1e1e;
+        background: #111;
+      }
+      .nav-label {
+        font-size: 11px;
+        color: #555;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .nav-title {
+        font-size: 13px;
+        color: #f5f0eb;
+        font-weight: 500;
+        line-height: 1.3;
+      }
+      .nav-btn.next {
+        text-align: right;
+        margin-left: auto;
+      }
     </style>
   </head>
   <body>
-
     <!-- Auth loading overlay -->
     <div id="authOverlay"><div class="spinner"></div></div>
 
     <!-- Sidebar overlay (mobile) -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+      onclick="closeSidebar()"
+    ></div>
 
     <!-- Top Bar -->
     <header class="topbar">
@@ -380,7 +492,7 @@
         <div id="chapterInfo"></div>
 
         <!-- Prev / Next nav -->
-        <div class="chapter-nav" id="chapterNav" style="display:none">
+        <div class="chapter-nav" id="chapterNav" style="display: none">
           <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">
             <span class="nav-label">← Previous</span>
             <span class="nav-title" id="prevTitle"></span>
@@ -394,14 +506,22 @@
     </div>
 
     <script type="module">
-      import { initializeApp }                                    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getAuth, onAuthStateChanged, signOut }             from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      import { getFirestore, doc, getDoc }                        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-      import firebaseConfig                                       from "./firebase-config.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+      import firebaseConfig from "./firebase-config.js";
 
-      const app  = initializeApp(firebaseConfig);
+      const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-      const db   = getFirestore(app);
+      const db = getFirestore(app);
 
       // ══════════════════════════════════════════════════════
       // COURSE DATA — Add your YouTube video IDs here
@@ -411,44 +531,232 @@
       // ══════════════════════════════════════════════════════
       const CHAPTERS = [
         // ── PART ONE: FOUNDATIONS ──────────────────────────
-        { part: "Part One — Foundations", num: "01", title: "Understanding Photography",        lessons: "4 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["What photography really is: drawing with light","The Nigerian photography lineage: J.D. Okhai Ojeikere to the new generation","Why demand for quality photography in Nigeria has never been higher","The photographer mindset: curiosity, patience, resilience","Real example: Seeing the Rembrandt portrait hiding in Balogun Market","Exercise: Seeing Like a Photographer (one full day, no camera)"] },
-        { part: "Part One — Foundations", num: "02", title: "Camera Types and Equipment",       lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Smartphone vs DSLR vs Mirrorless: honest advice on what you actually need","The Lagos food blogger who built 50K followers with just an iPhone SE","Essential equipment priority table with real Nigerian Naira price ranges","Where to buy in Nigeria: Computer Village survival guide","How to test used cameras: the 8-step checklist","Exercise: Equipment Audit and Wish List"] },
-        { part: "Part One — Foundations", num: "03", title: "The Exposure Triangle",            lessons: "6 Lessons + 5 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Aperture decoded: f-stops, depth of field, and creative control","Shutter speed mastery: freezing the Eyo Festival vs light trails","ISO explained: the volume knob analogy","How aperture, shutter & ISO work together","Shooting modes: Manual, Aperture Priority, Shutter Priority","Exercise: The Aperture Experiment (5 f-stops, one subject)"] },
-        { part: "Part One — Foundations", num: "04", title: "Composition and Visual Storytelling", lessons: "7 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["The rule of thirds and why breaking it matters","Leading lines, framing, and negative space","Perspective and viewpoint: shooting Eko Bridge from 5 different angles","Visual storytelling: the Eyo Festival sequence","Exercise: The Composition Challenge (same subject, 10 different framings)"] },
-        { part: "Part One — Foundations", num: "05", title: "Understanding Light",               lessons: "6 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Natural vs artificial light: strengths of each","Golden hour in Lagos: why 6:15am is worth waking up for","Dealing with harsh midday sun — the Lagos noon challenge","Rembrandt, split, and butterfly lighting patterns","Exercise: The One-Light Portrait Series"] },
+        {
+          part: "Part One — Foundations",
+          num: "01",
+          title: "Understanding Photography",
+          lessons: "4 Lessons + 4 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "What photography really is: drawing with light",
+            "The Nigerian photography lineage: J.D. Okhai Ojeikere to the new generation",
+            "Why demand for quality photography in Nigeria has never been higher",
+            "The photographer mindset: curiosity, patience, resilience",
+            "Real example: Seeing the Rembrandt portrait hiding in Balogun Market",
+            "Exercise: Seeing Like a Photographer (one full day, no camera)",
+          ],
+        },
+        {
+          part: "Part One — Foundations",
+          num: "02",
+          title: "Camera Types and Equipment",
+          lessons: "5 Lessons + 2 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Smartphone vs DSLR vs Mirrorless: honest advice on what you actually need",
+            "The Lagos food blogger who built 50K followers with just an iPhone SE",
+            "Essential equipment priority table with real Nigerian Naira price ranges",
+            "Where to buy in Nigeria: Computer Village survival guide",
+            "How to test used cameras: the 8-step checklist",
+            "Exercise: Equipment Audit and Wish List",
+          ],
+        },
+        {
+          part: "Part One — Foundations",
+          num: "03",
+          title: "The Exposure Triangle",
+          lessons: "6 Lessons + 5 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Aperture decoded: f-stops, depth of field, and creative control",
+            "Shutter speed mastery: freezing the Eyo Festival vs light trails",
+            "ISO explained: the volume knob analogy",
+            "How aperture, shutter & ISO work together",
+            "Shooting modes: Manual, Aperture Priority, Shutter Priority",
+            "Exercise: The Aperture Experiment (5 f-stops, one subject)",
+          ],
+        },
+        {
+          part: "Part One — Foundations",
+          num: "04",
+          title: "Composition and Visual Storytelling",
+          lessons: "7 Lessons + 4 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "The rule of thirds and why breaking it matters",
+            "Leading lines, framing, and negative space",
+            "Perspective and viewpoint: shooting Eko Bridge from 5 different angles",
+            "Visual storytelling: the Eyo Festival sequence",
+            "Exercise: The Composition Challenge (same subject, 10 different framings)",
+          ],
+        },
+        {
+          part: "Part One — Foundations",
+          num: "05",
+          title: "Understanding Light",
+          lessons: "6 Lessons + 4 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Natural vs artificial light: strengths of each",
+            "Golden hour in Lagos: why 6:15am is worth waking up for",
+            "Dealing with harsh midday sun — the Lagos noon challenge",
+            "Rembrandt, split, and butterfly lighting patterns",
+            "Exercise: The One-Light Portrait Series",
+          ],
+        },
 
         // ── PART TWO: BUILDING YOUR CRAFT ─────────────────
-        { part: "Part Two — Building Your Craft", num: "06", title: "Lenses and Their Creative Applications", lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Prime vs zoom lenses: the honest comparison","The 50mm for street photography in Lagos","Wide-angle storytelling at Lekki Market","Telephoto compression at FESTAC parade","Exercise: The Focal Length Project (one scene, four lenses)"] },
-        { part: "Part Two — Building Your Craft", num: "07", title: "Post-Processing and Editing",           lessons: "6 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Lightroom vs free tools: what you actually need","The 5-minute edit workflow for client delivery","Colour grading for Nigerian skin tones","Batch editing for wedding photographers","Exercise: Before & After — edit 10 photos in 30 minutes"] },
+        {
+          part: "Part Two — Building Your Craft",
+          num: "06",
+          title: "Lenses and Their Creative Applications",
+          lessons: "5 Lessons + 2 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Prime vs zoom lenses: the honest comparison",
+            "The 50mm for street photography in Lagos",
+            "Wide-angle storytelling at Lekki Market",
+            "Telephoto compression at FESTAC parade",
+            "Exercise: The Focal Length Project (one scene, four lenses)",
+          ],
+        },
+        {
+          part: "Part Two — Building Your Craft",
+          num: "07",
+          title: "Post-Processing and Editing",
+          lessons: "6 Lessons + 3 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Lightroom vs free tools: what you actually need",
+            "The 5-minute edit workflow for client delivery",
+            "Colour grading for Nigerian skin tones",
+            "Batch editing for wedding photographers",
+            "Exercise: Before & After — edit 10 photos in 30 minutes",
+          ],
+        },
 
         // ── PART THREE: GENRE MASTERY + ADVANCED ──────────
-        { part: "Part Three — Advanced Techniques", num: "08", title: "Genre Mastery",                       lessons: "8 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Wedding photography in Nigeria: timeline, challenges, Aso-Ebi culture","Portrait sessions: from passport photo to editorial","Street photography: safety, ethics, and finding stories in Lagos","Commercial & product photography for Nigerian e-commerce brands","Exercise: Shoot One Full Wedding or Event (mock or real)"] },
-        { part: "Part Three — Advanced Techniques", num: "09", title: "Advanced Lighting Techniques",        lessons: "5 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Off-camera flash: the basics without the complexity","Two-light portrait setup for Nigerian studios","Mixing flash with ambient light at outdoor Owambe receptions","Exercise: 3-Light Studio Setup (build it for under ₦50,000)"] },
-        { part: "Part Three — Advanced Techniques", num: "10", title: "Advanced Composition and Creative Vision", lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Developing your personal visual style","Breaking the rules: when to ignore composition guidelines","Sequencing a photo essay: the 10-photo story","Finding your signature — what makes your work unmistakably yours"] },
-        { part: "Part Three — Advanced Techniques", num: "11", title: "Advanced Post-Processing",             lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Luminosity masking for sky replacements","Frequency separation for skin retouching","Creating a consistent Lightroom preset from scratch","Delivering a full wedding gallery: file naming, export settings, online albums"] },
+        {
+          part: "Part Three — Advanced Techniques",
+          num: "08",
+          title: "Genre Mastery",
+          lessons: "8 Lessons + 4 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Wedding photography in Nigeria: timeline, challenges, Aso-Ebi culture",
+            "Portrait sessions: from passport photo to editorial",
+            "Street photography: safety, ethics, and finding stories in Lagos",
+            "Commercial & product photography for Nigerian e-commerce brands",
+            "Exercise: Shoot One Full Wedding or Event (mock or real)",
+          ],
+        },
+        {
+          part: "Part Three — Advanced Techniques",
+          num: "09",
+          title: "Advanced Lighting Techniques",
+          lessons: "5 Lessons + 3 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Off-camera flash: the basics without the complexity",
+            "Two-light portrait setup for Nigerian studios",
+            "Mixing flash with ambient light at outdoor Owambe receptions",
+            "Exercise: 3-Light Studio Setup (build it for under ₦50,000)",
+          ],
+        },
+        {
+          part: "Part Three — Advanced Techniques",
+          num: "10",
+          title: "Advanced Composition and Creative Vision",
+          lessons: "5 Lessons + 2 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Developing your personal visual style",
+            "Breaking the rules: when to ignore composition guidelines",
+            "Sequencing a photo essay: the 10-photo story",
+            "Finding your signature — what makes your work unmistakably yours",
+          ],
+        },
+        {
+          part: "Part Three — Advanced Techniques",
+          num: "11",
+          title: "Advanced Post-Processing",
+          lessons: "5 Lessons + 2 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Luminosity masking for sky replacements",
+            "Frequency separation for skin retouching",
+            "Creating a consistent Lightroom preset from scratch",
+            "Delivering a full wedding gallery: file naming, export settings, online albums",
+          ],
+        },
 
         // ── PART FOUR: THE BUSINESS ────────────────────────
-        { part: "Part Four — The Business of Photography", num: "12", title: "Building Your Photography Business in Nigeria", lessons: "8 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Pricing your work: the real cost calculation for Nigerian photographers","Contracts that protect you: essential clauses explained","Finding your first 10 clients without spending money on ads","Managing client expectations from enquiry to delivery","Exercise: Write your pricing sheet and first contract"] },
-        { part: "Part Four — The Business of Photography", num: "13", title: "Scaling Your Photography Income",                lessons: "6 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Passive income streams: presets, courses, stock photography","Second shooter relationships and studio partnerships","Corporate clients: pitching to Nigerian brands and NGOs","Raising your rates without losing clients"] },
-        { part: "Part Four — The Business of Photography", num: "14", title: "Your Digital Presence and Personal Brand",       lessons: "5 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Instagram strategy that actually works in 2025 for Nigerian photographers","Building a portfolio website on a budget","Getting featured in Nigerian media and publications","Exercise: Build your first portfolio site in one weekend"] },
-        { part: "Part Four — The Business of Photography", num: "15", title: "Ethics, Legal Considerations, and Professional Standards", lessons: "4 Lessons + 1 Exercise", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Model releases and property releases in Nigeria","Copyright: who owns the photo?","Handling difficult clients professionally","Protecting your work online from theft"] },
-        { part: "Part Four — The Business of Photography", num: "16", title: "The Road Ahead",                                 lessons: "3 Lessons + 1 Exercise", videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: ["Building a 5-year photography career plan","Staying inspired: avoiding creative burnout","The Nigerian photography community: where to find your people","Your next 30 days: a concrete action plan"] },
+        {
+          part: "Part Four — The Business of Photography",
+          num: "12",
+          title: "Building Your Photography Business in Nigeria",
+          lessons: "8 Lessons + 3 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Pricing your work: the real cost calculation for Nigerian photographers",
+            "Contracts that protect you: essential clauses explained",
+            "Finding your first 10 clients without spending money on ads",
+            "Managing client expectations from enquiry to delivery",
+            "Exercise: Write your pricing sheet and first contract",
+          ],
+        },
+        {
+          part: "Part Four — The Business of Photography",
+          num: "13",
+          title: "Scaling Your Photography Income",
+          lessons: "6 Lessons + 2 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Passive income streams: presets, courses, stock photography",
+            "Second shooter relationships and studio partnerships",
+            "Corporate clients: pitching to Nigerian brands and NGOs",
+            "Raising your rates without losing clients",
+          ],
+        },
+        {
+          part: "Part Four — The Business of Photography",
+          num: "14",
+          title: "Your Digital Presence and Personal Brand",
+          lessons: "5 Lessons + 3 Exercises",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Instagram strategy that actually works in 2025 for Nigerian photographers",
+            "Building a portfolio website on a budget",
+            "Getting featured in Nigerian media and publications",
+            "Exercise: Build your first portfolio site in one weekend",
+          ],
+        },
+        {
+          part: "Part Four — The Business of Photography",
+          num: "15",
+          title: "Ethics, Legal Considerations, and Professional Standards",
+          lessons: "4 Lessons + 1 Exercise",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Model releases and property releases in Nigeria",
+            "Copyright: who owns the photo?",
+            "Handling difficult clients professionally",
+            "Protecting your work online from theft",
+          ],
+        },
+        {
+          part: "Part Four — The Business of Photography",
+          num: "16",
+          title: "The Road Ahead",
+          lessons: "3 Lessons + 1 Exercise",
+          videoId: "YOUR_YOUTUBE_VIDEO_ID",
+          topics: [
+            "Building a 5-year photography career plan",
+            "Staying inspired: avoiding creative burnout",
+            "The Nigerian photography community: where to find your people",
+            "Your next 30 days: a concrete action plan",
+          ],
+        },
       ];
 
       // ── Auth guard ──
@@ -489,7 +797,10 @@
           btn.className = "chapter-btn";
           btn.id = `ch-btn-${i}`;
           btn.innerHTML = `<span class="chapter-num">${ch.num}</span><span class="chapter-title">${ch.title}</span>`;
-          btn.onclick = () => { loadChapter(i); closeSidebar(); };
+          btn.onclick = () => {
+            loadChapter(i);
+            closeSidebar();
+          };
           list.appendChild(btn);
         });
       }
@@ -501,7 +812,9 @@
         activeIndex = index;
 
         // Update active state in sidebar
-        document.querySelectorAll(".chapter-btn").forEach(b => b.classList.remove("active"));
+        document
+          .querySelectorAll(".chapter-btn")
+          .forEach((b) => b.classList.remove("active"));
         const activeBtn = document.getElementById(`ch-btn-${index}`);
         if (activeBtn) {
           activeBtn.classList.add("active");
@@ -517,7 +830,7 @@
         }
 
         // Chapter info
-        const topicsHTML = ch.topics.map(t => `<li>${t}</li>`).join("");
+        const topicsHTML = ch.topics.map((t) => `<li>${t}</li>`).join("");
         document.getElementById("chapterInfo").innerHTML = `
           <div class="chapter-meta">
             <span class="part-tag">${ch.part}</span>
@@ -532,23 +845,27 @@
         const nav = document.getElementById("chapterNav");
         nav.style.display = "flex";
 
-        const prevBtn   = document.getElementById("prevBtn");
-        const nextBtn   = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
         const prevTitle = document.getElementById("prevTitle");
         const nextTitle = document.getElementById("nextTitle");
 
         if (index > 0) {
-          prevBtn.disabled  = false;
-          prevTitle.textContent = `Chapter ${CHAPTERS[index - 1].num}: ${CHAPTERS[index - 1].title}`;
+          prevBtn.disabled = false;
+          prevTitle.textContent = `Chapter ${CHAPTERS[index - 1].num}: ${
+            CHAPTERS[index - 1].title
+          }`;
         } else {
-          prevBtn.disabled  = true;
+          prevBtn.disabled = true;
           prevTitle.textContent = "";
         }
         if (index < CHAPTERS.length - 1) {
-          nextBtn.disabled  = false;
-          nextTitle.textContent = `Chapter ${CHAPTERS[index + 1].num}: ${CHAPTERS[index + 1].title}`;
+          nextBtn.disabled = false;
+          nextTitle.textContent = `Chapter ${CHAPTERS[index + 1].num}: ${
+            CHAPTERS[index + 1].title
+          }`;
         } else {
-          nextBtn.disabled  = true;
+          nextBtn.disabled = true;
           nextTitle.textContent = "";
         }
 
@@ -561,7 +878,7 @@
       };
 
       // ── Mobile sidebar ──
-      window.toggleSidebar  = () => {
+      window.toggleSidebar = () => {
         document.getElementById("sidebar").classList.toggle("open");
         document.getElementById("sidebarOverlay").classList.toggle("visible");
       };
