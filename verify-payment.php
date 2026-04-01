@@ -17,7 +17,8 @@ if (!$reference) {
     exit;
 }
 
-$secret_key = 'YOUR_PAYSTACK_SECRET_KEY'; // e.g. sk_live_xxxxxxxxxxxxxxxxx
+require_once __DIR__ . '/config.php';
+$secret_key = PAYSTACK_SECRET_KEY;
 
 $curl = curl_init();
 curl_setopt_array($curl, [
