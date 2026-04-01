@@ -3,101 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Course Portal | NEJ Masterclass</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>Course Portal | Jay Masterclass</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <!-- Facebook Pixel -->
     <script>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
-      );
-      fbq("init", "517290012136807");
-      fbq("track", "PageView");
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '517290012136807');
+      fbq('track', 'PageView');
     </script>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"
-    /></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"/></noscript>
     <!-- End Facebook Pixel -->
     <style>
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
       body {
         background: #0a0a0a;
         color: #f5f0eb;
         font-family: "DM Sans", sans-serif;
         min-height: 100vh;
-        overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
-      /* ── Auth loading overlay ── */
+      /* ── Auth overlay ── */
       #authOverlay {
-        position: fixed;
-        inset: 0;
+        position: fixed; inset: 0;
         background: #0a0a0a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: flex; align-items: center; justify-content: center;
         z-index: 999;
       }
       .spinner {
-        width: 40px;
-        height: 40px;
+        width: 40px; height: 40px;
         border: 3px solid #1e1e1e;
         border-top-color: #c8a24e;
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
       }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
+      @keyframes spin { to { transform: rotate(360deg); } }
 
       /* ── Top Bar ── */
       .topbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 60px;
-        background: #0d0d0d;
+        position: sticky; top: 0;
+        background: rgba(10,10,10,0.95);
+        backdrop-filter: blur(12px);
         border-bottom: 1px solid #1a1a1a;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 24px;
+        height: 60px;
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 0 32px;
         z-index: 100;
       }
       .topbar-logo {
@@ -105,356 +63,264 @@
         font-size: 18px;
         color: #c8a24e;
       }
-      .topbar-right {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      .user-email {
-        font-size: 13px;
-        color: #555;
-        display: none;
-      }
-      @media (min-width: 600px) {
-        .user-email {
-          display: block;
-        }
-      }
+      .topbar-right { display: flex; align-items: center; gap: 16px; }
+      .user-email { font-size: 13px; color: #444; }
+      @media (max-width: 600px) { .user-email { display: none; } }
       .logout-btn {
-        font-size: 13px;
-        color: #666;
+        font-size: 13px; color: #666;
         background: none;
-        border: 1px solid #1e1e1e;
+        border: 1px solid #222;
         border-radius: 8px;
         padding: 6px 14px;
         cursor: pointer;
         font-family: "DM Sans", sans-serif;
         transition: color 0.2s, border-color 0.2s;
       }
-      .logout-btn:hover {
-        color: #f5f0eb;
-        border-color: #333;
-      }
+      .logout-btn:hover { color: #f5f0eb; border-color: #444; }
 
-      /* ── Layout ── */
-      .layout {
-        display: flex;
-        padding-top: 60px;
-        min-height: 100vh;
-      }
+      /* ── Page body ── */
+      .page { padding: 40px 32px 80px; max-width: 1400px; margin: 0 auto; }
+      @media (max-width: 600px) { .page { padding: 28px 16px 60px; } }
 
-      /* ── Sidebar ── */
-      .sidebar {
-        width: 300px;
-        flex-shrink: 0;
-        background: #0d0d0d;
-        border-right: 1px solid #1a1a1a;
-        height: calc(100vh - 60px);
-        overflow-y: auto;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        padding: 24px 0;
-        scrollbar-width: thin;
-        scrollbar-color: #1e1e1e transparent;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        z-index: 50;
-      }
-      .sidebar.open {
-        transform: translateX(0);
-      }
-      @media (min-width: 900px) {
-        .sidebar {
-          transform: translateX(0);
-        }
-      }
-      .sidebar-header {
-        padding: 0 20px 16px;
+      /* ── Welcome ── */
+      .welcome {
+        margin-bottom: 48px;
+        padding-bottom: 32px;
         border-bottom: 1px solid #1a1a1a;
-        margin-bottom: 8px;
       }
-      .sidebar-header h2 {
+      .welcome-label {
         font-size: 11px;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: #555;
+        color: #c8a24e;
         font-weight: 600;
+        margin-bottom: 10px;
       }
-      .part-label {
+      .welcome h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(24px, 3vw, 36px);
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .welcome p { font-size: 15px; color: #555; }
+
+      /* ── Part section ── */
+      .part-section { margin-bottom: 52px; }
+      .part-header { margin-bottom: 20px; }
+      .part-tag {
+        display: inline-block;
         font-size: 10px;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: #c8a24e;
         font-weight: 600;
-        padding: 16px 20px 8px;
+        background: rgba(200,162,78,0.08);
+        border: 1px solid rgba(200,162,78,0.15);
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin-bottom: 10px;
       }
-      .chapter-btn {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        width: 100%;
-        padding: 12px 20px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        text-align: left;
-        transition: background 0.15s;
-        font-family: "DM Sans", sans-serif;
-      }
-      .chapter-btn:hover {
-        background: #151515;
-      }
-      .chapter-btn.active {
-        background: rgba(200, 162, 78, 0.08);
-      }
-      .chapter-btn.active .chapter-num {
-        color: #c8a24e;
-      }
-      .chapter-btn.active .chapter-title {
-        color: #f5f0eb;
-      }
-      .chapter-num {
-        font-size: 13px;
+      .part-title {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
         font-weight: 700;
-        color: #333;
-        flex-shrink: 0;
-        min-width: 24px;
-        margin-top: 1px;
-      }
-      .chapter-title {
-        font-size: 13px;
-        color: #888;
-        line-height: 1.4;
-        font-weight: 500;
-      }
-
-      /* ── Main Content ── */
-      .main {
-        flex: 1;
-        margin-left: 0;
-        padding: 32px 24px;
-        max-width: 100%;
-      }
-      @media (min-width: 900px) {
-        .main {
-          margin-left: 300px;
-        }
-      }
-
-      /* ── Mobile sidebar toggle ── */
-      .sidebar-toggle {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        background: none;
-        border: 1px solid #1e1e1e;
-        border-radius: 8px;
-        color: #888;
-        font-family: "DM Sans", sans-serif;
-        font-size: 13px;
-        padding: 6px 12px;
-        cursor: pointer;
-        margin-bottom: 24px;
-        transition: color 0.2s, border-color 0.2s;
-      }
-      .sidebar-toggle:hover {
         color: #f5f0eb;
-        border-color: #333;
-      }
-      @media (min-width: 900px) {
-        .sidebar-toggle {
-          display: none;
-        }
-      }
-      .sidebar-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 40;
-        top: 60px;
-      }
-      .sidebar-overlay.visible {
-        display: block;
-      }
-      @media (min-width: 900px) {
-        .sidebar-overlay {
-          display: none !important;
-        }
       }
 
-      /* ── Video Player ── */
-      .video-wrapper {
+      /* ── Horizontal scroll row ── */
+      .cards-row {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: #1e1e1e transparent;
+        -webkit-overflow-scrolling: touch;
+      }
+      .cards-row::-webkit-scrollbar { height: 4px; }
+      .cards-row::-webkit-scrollbar-track { background: transparent; }
+      .cards-row::-webkit-scrollbar-thumb { background: #1e1e1e; border-radius: 2px; }
+
+      /* ── Card ── */
+      .card {
+        flex: 0 0 280px;
         background: #111;
         border: 1px solid #1a1a1a;
         border-radius: 12px;
         overflow: hidden;
-        margin-bottom: 28px;
-        position: relative;
-        padding-top: 56.25%; /* 16:9 */
-      }
-      .video-wrapper iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-      .video-placeholder {
-        position: absolute;
-        inset: 0;
+        cursor: pointer;
+        transition: border-color 0.2s, transform 0.2s;
+        scroll-snap-align: start;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: #111;
-        color: #444;
-        gap: 12px;
       }
-      .video-placeholder .play-icon {
-        width: 64px;
-        height: 64px;
-        border: 2px solid #2a2a2a;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: #333;
-      }
-      .video-placeholder p {
-        font-size: 13px;
-        color: #444;
+      .card:hover {
+        border-color: rgba(200,162,78,0.4);
+        transform: translateY(-3px);
       }
 
-      /* ── Chapter Info ── */
-      .chapter-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
+      /* ── Thumbnail ── */
+      .card-thumb {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background: #161616;
+        overflow: hidden;
+        flex-shrink: 0;
       }
-      .part-tag {
+      .card-thumb img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+      }
+      .card:hover .card-thumb img { transform: scale(1.04); }
+      .thumb-placeholder {
+        position: absolute; inset: 0;
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: #141414;
+        gap: 8px;
+      }
+      .thumb-placeholder .play-ring {
+        width: 48px; height: 48px;
+        border: 2px solid #2a2a2a;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #333; font-size: 16px;
+      }
+      .thumb-placeholder span { font-size: 11px; color: #333; letter-spacing: 1px; }
+      .play-overlay {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(0,0,0,0.35);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .card:hover .play-overlay { opacity: 1; }
+      .play-btn {
+        width: 52px; height: 52px;
+        background: rgba(200,162,78,0.9);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: #0a0a0a;
+        font-size: 18px;
+        padding-left: 4px;
+      }
+      .chapter-badge {
+        position: absolute;
+        top: 10px; left: 10px;
+        background: rgba(10,10,10,0.85);
+        border: 1px solid rgba(200,162,78,0.3);
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #c8a24e;
+        padding: 3px 8px;
+        letter-spacing: 1px;
+      }
+
+      /* ── Card body ── */
+      .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+      .card-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #f5f0eb;
+        line-height: 1.4;
+      }
+      .card-desc {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.6;
+        flex: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-footer {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-top: 4px;
+      }
+      .lessons-badge {
+        font-size: 11px;
+        color: #444;
+      }
+      .watch-label {
+        font-size: 11px;
+        color: #c8a24e;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      /* ── Video Modal ── */
+      .modal-overlay {
+        display: none;
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.92);
+        z-index: 500;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .modal-overlay.open { display: flex; }
+      .modal {
+        background: #111;
+        border: 1px solid #1e1e1e;
+        border-radius: 14px;
+        width: 100%;
+        max-width: 860px;
+        overflow: hidden;
+        position: relative;
+        animation: modalIn 0.25s ease;
+      }
+      @keyframes modalIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+      .modal-close {
+        position: absolute; top: 14px; right: 14px;
+        width: 32px; height: 32px;
+        background: rgba(10,10,10,0.7);
+        border: 1px solid #2a2a2a;
+        border-radius: 50%;
+        color: #888; font-size: 16px;
+        cursor: pointer; z-index: 10;
+        display: flex; align-items: center; justify-content: center;
+        transition: color 0.2s, border-color 0.2s;
+        font-family: "DM Sans", sans-serif;
+      }
+      .modal-close:hover { color: #f5f0eb; border-color: #555; }
+      .modal-video {
+        position: relative;
+        padding-top: 56.25%;
+        background: #000;
+      }
+      .modal-video iframe {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        border: none;
+      }
+      .modal-info { padding: 20px 24px 24px; }
+      .modal-chapter-tag {
         font-size: 10px;
         letter-spacing: 3px;
         text-transform: uppercase;
         color: #c8a24e;
         font-weight: 600;
-        background: rgba(200, 162, 78, 0.08);
-        border: 1px solid rgba(200, 162, 78, 0.15);
-        padding: 4px 10px;
-        border-radius: 20px;
+        margin-bottom: 8px;
       }
-      .lessons-tag {
-        font-size: 12px;
-        color: #555;
-      }
-      .chapter-title-main {
+      .modal-title {
         font-family: "Playfair Display", serif;
-        font-size: clamp(22px, 3vw, 32px);
+        font-size: 20px;
         font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 20px;
+        margin-bottom: 8px;
       }
-
-      /* ── Topics list ── */
-      .topics-heading {
-        font-size: 11px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        color: #555;
-        font-weight: 600;
-        margin-bottom: 14px;
-      }
-      .topics-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 40px;
-      }
-      .topics-list li {
-        display: flex;
-        gap: 12px;
-        align-items: flex-start;
-        font-size: 14px;
-        color: #888;
-        line-height: 1.5;
-      }
-      .topics-list li::before {
-        content: "—";
-        color: #c8a24e;
-        flex-shrink: 0;
-        margin-top: 1px;
-      }
-
-      /* ── Navigation ── */
-      .chapter-nav {
-        display: flex;
-        justify-content: space-between;
-        gap: 16px;
-        padding-top: 24px;
-        border-top: 1px solid #1a1a1a;
-        flex-wrap: wrap;
-      }
-      .nav-btn {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        background: #111;
-        border: 1px solid #1e1e1e;
-        border-radius: 10px;
-        padding: 14px 18px;
-        cursor: pointer;
-        font-family: "DM Sans", sans-serif;
-        text-align: left;
-        transition: border-color 0.2s, background 0.2s;
-        flex: 1;
-        min-width: 140px;
-        max-width: 240px;
-      }
-      .nav-btn:hover {
-        border-color: #c8a24e;
-        background: rgba(200, 162, 78, 0.04);
-      }
-      .nav-btn:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-      }
-      .nav-btn:disabled:hover {
-        border-color: #1e1e1e;
-        background: #111;
-      }
-      .nav-label {
-        font-size: 11px;
-        color: #555;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      .nav-title {
-        font-size: 13px;
-        color: #f5f0eb;
-        font-weight: 500;
-        line-height: 1.3;
-      }
-      .nav-btn.next {
-        text-align: right;
-        margin-left: auto;
-      }
+      .modal-desc { font-size: 13px; color: #666; line-height: 1.7; }
     </style>
   </head>
   <body>
-    <!-- Auth loading overlay -->
-    <div id="authOverlay"><div class="spinner"></div></div>
 
-    <!-- Sidebar overlay (mobile) -->
-    <div
-      class="sidebar-overlay"
-      id="sidebarOverlay"
-      onclick="closeSidebar()"
-    ></div>
+    <!-- Auth overlay -->
+    <div id="authOverlay"><div class="spinner"></div></div>
 
     <!-- Top Bar -->
     <header class="topbar">
@@ -465,430 +331,182 @@
       </div>
     </header>
 
-    <div class="layout">
-      <!-- Sidebar -->
-      <nav class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-          <h2>Course Chapters</h2>
+    <!-- Page -->
+    <div class="page" id="pageContent" style="display:none">
+
+      <!-- Welcome -->
+      <div class="welcome">
+        <div class="welcome-label">Your Course</div>
+        <h1>The Complete Photography Masterclass</h1>
+        <p>16 chapters · 4 parts · 60+ real-world examples · 45+ exercises</p>
+      </div>
+
+      <!-- Course rows rendered by JS -->
+      <div id="courseRows"></div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+      <div class="modal" id="modal">
+        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+        <div class="modal-video" id="modalVideo"></div>
+        <div class="modal-info">
+          <div class="modal-chapter-tag" id="modalTag"></div>
+          <div class="modal-title" id="modalTitle"></div>
+          <div class="modal-desc" id="modalDesc"></div>
         </div>
-        <div id="chapterList"></div>
-      </nav>
-
-      <!-- Main -->
-      <main class="main">
-        <button class="sidebar-toggle" onclick="toggleSidebar()">
-          ☰ &nbsp;All Chapters
-        </button>
-
-        <!-- Video area -->
-        <div class="video-wrapper" id="videoWrapper">
-          <div class="video-placeholder">
-            <div class="play-icon">▶</div>
-            <p>Select a chapter to begin</p>
-          </div>
-        </div>
-
-        <!-- Chapter info -->
-        <div id="chapterInfo"></div>
-
-        <!-- Prev / Next nav -->
-        <div class="chapter-nav" id="chapterNav" style="display: none">
-          <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">
-            <span class="nav-label">← Previous</span>
-            <span class="nav-title" id="prevTitle"></span>
-          </button>
-          <button class="nav-btn next" id="nextBtn" onclick="navigate(1)">
-            <span class="nav-label">Next →</span>
-            <span class="nav-title" id="nextTitle"></span>
-          </button>
-        </div>
-      </main>
+      </div>
     </div>
 
     <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import {
-        getAuth,
-        onAuthStateChanged,
-        signOut,
-      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      import {
-        getFirestore,
-        doc,
-        getDoc,
-      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-      import firebaseConfig from "./firebase-config.js";
+      import { initializeApp }               from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import firebaseConfig                  from "./firebase-config.js";
 
-      const app = initializeApp(firebaseConfig);
+      const app  = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-      const db = getFirestore(app);
 
-      // ══════════════════════════════════════════════════════
-      // COURSE DATA — Add your YouTube video IDs here
-      // For each chapter, replace "YOUR_YOUTUBE_VIDEO_ID" with
-      // the actual ID from your YouTube URL, e.g.:
-      // youtube.com/watch?v=dQw4w9WgXcQ → videoId: "dQw4w9WgXcQ"
-      // ══════════════════════════════════════════════════════
-      const CHAPTERS = [
-        // ── PART ONE: FOUNDATIONS ──────────────────────────
-        {
-          part: "Part One — Foundations",
-          num: "01",
-          title: "Understanding Photography",
-          lessons: "4 Lessons + 4 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "What photography really is: drawing with light",
-            "The Nigerian photography lineage: J.D. Okhai Ojeikere to the new generation",
-            "Why demand for quality photography in Nigeria has never been higher",
-            "The photographer mindset: curiosity, patience, resilience",
-            "Real example: Seeing the Rembrandt portrait hiding in Balogun Market",
-            "Exercise: Seeing Like a Photographer (one full day, no camera)",
-          ],
-        },
-        {
-          part: "Part One — Foundations",
-          num: "02",
-          title: "Camera Types and Equipment",
-          lessons: "5 Lessons + 2 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Smartphone vs DSLR vs Mirrorless: honest advice on what you actually need",
-            "The Lagos food blogger who built 50K followers with just an iPhone SE",
-            "Essential equipment priority table with real Nigerian Naira price ranges",
-            "Where to buy in Nigeria: Computer Village survival guide",
-            "How to test used cameras: the 8-step checklist",
-            "Exercise: Equipment Audit and Wish List",
-          ],
-        },
-        {
-          part: "Part One — Foundations",
-          num: "03",
-          title: "The Exposure Triangle",
-          lessons: "6 Lessons + 5 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Aperture decoded: f-stops, depth of field, and creative control",
-            "Shutter speed mastery: freezing the Eyo Festival vs light trails",
-            "ISO explained: the volume knob analogy",
-            "How aperture, shutter & ISO work together",
-            "Shooting modes: Manual, Aperture Priority, Shutter Priority",
-            "Exercise: The Aperture Experiment (5 f-stops, one subject)",
-          ],
-        },
-        {
-          part: "Part One — Foundations",
-          num: "04",
-          title: "Composition and Visual Storytelling",
-          lessons: "7 Lessons + 4 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "The rule of thirds and why breaking it matters",
-            "Leading lines, framing, and negative space",
-            "Perspective and viewpoint: shooting Eko Bridge from 5 different angles",
-            "Visual storytelling: the Eyo Festival sequence",
-            "Exercise: The Composition Challenge (same subject, 10 different framings)",
-          ],
-        },
-        {
-          part: "Part One — Foundations",
-          num: "05",
-          title: "Understanding Light",
-          lessons: "6 Lessons + 4 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Natural vs artificial light: strengths of each",
-            "Golden hour in Lagos: why 6:15am is worth waking up for",
-            "Dealing with harsh midday sun — the Lagos noon challenge",
-            "Rembrandt, split, and butterfly lighting patterns",
-            "Exercise: The One-Light Portrait Series",
-          ],
-        },
-
-        // ── PART TWO: BUILDING YOUR CRAFT ─────────────────
-        {
-          part: "Part Two — Building Your Craft",
-          num: "06",
-          title: "Lenses and Their Creative Applications",
-          lessons: "5 Lessons + 2 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Prime vs zoom lenses: the honest comparison",
-            "The 50mm for street photography in Lagos",
-            "Wide-angle storytelling at Lekki Market",
-            "Telephoto compression at FESTAC parade",
-            "Exercise: The Focal Length Project (one scene, four lenses)",
-          ],
-        },
-        {
-          part: "Part Two — Building Your Craft",
-          num: "07",
-          title: "Post-Processing and Editing",
-          lessons: "6 Lessons + 3 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Lightroom vs free tools: what you actually need",
-            "The 5-minute edit workflow for client delivery",
-            "Colour grading for Nigerian skin tones",
-            "Batch editing for wedding photographers",
-            "Exercise: Before & After — edit 10 photos in 30 minutes",
-          ],
-        },
-
-        // ── PART THREE: GENRE MASTERY + ADVANCED ──────────
-        {
-          part: "Part Three — Advanced Techniques",
-          num: "08",
-          title: "Genre Mastery",
-          lessons: "8 Lessons + 4 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Wedding photography in Nigeria: timeline, challenges, Aso-Ebi culture",
-            "Portrait sessions: from passport photo to editorial",
-            "Street photography: safety, ethics, and finding stories in Lagos",
-            "Commercial & product photography for Nigerian e-commerce brands",
-            "Exercise: Shoot One Full Wedding or Event (mock or real)",
-          ],
-        },
-        {
-          part: "Part Three — Advanced Techniques",
-          num: "09",
-          title: "Advanced Lighting Techniques",
-          lessons: "5 Lessons + 3 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Off-camera flash: the basics without the complexity",
-            "Two-light portrait setup for Nigerian studios",
-            "Mixing flash with ambient light at outdoor Owambe receptions",
-            "Exercise: 3-Light Studio Setup (build it for under ₦50,000)",
-          ],
-        },
-        {
-          part: "Part Three — Advanced Techniques",
-          num: "10",
-          title: "Advanced Composition and Creative Vision",
-          lessons: "5 Lessons + 2 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Developing your personal visual style",
-            "Breaking the rules: when to ignore composition guidelines",
-            "Sequencing a photo essay: the 10-photo story",
-            "Finding your signature — what makes your work unmistakably yours",
-          ],
-        },
-        {
-          part: "Part Three — Advanced Techniques",
-          num: "11",
-          title: "Advanced Post-Processing",
-          lessons: "5 Lessons + 2 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Luminosity masking for sky replacements",
-            "Frequency separation for skin retouching",
-            "Creating a consistent Lightroom preset from scratch",
-            "Delivering a full wedding gallery: file naming, export settings, online albums",
-          ],
-        },
-
-        // ── PART FOUR: THE BUSINESS ────────────────────────
-        {
-          part: "Part Four — The Business of Photography",
-          num: "12",
-          title: "Building Your Photography Business in Nigeria",
-          lessons: "8 Lessons + 3 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Pricing your work: the real cost calculation for Nigerian photographers",
-            "Contracts that protect you: essential clauses explained",
-            "Finding your first 10 clients without spending money on ads",
-            "Managing client expectations from enquiry to delivery",
-            "Exercise: Write your pricing sheet and first contract",
-          ],
-        },
-        {
-          part: "Part Four — The Business of Photography",
-          num: "13",
-          title: "Scaling Your Photography Income",
-          lessons: "6 Lessons + 2 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Passive income streams: presets, courses, stock photography",
-            "Second shooter relationships and studio partnerships",
-            "Corporate clients: pitching to Nigerian brands and NGOs",
-            "Raising your rates without losing clients",
-          ],
-        },
-        {
-          part: "Part Four — The Business of Photography",
-          num: "14",
-          title: "Your Digital Presence and Personal Brand",
-          lessons: "5 Lessons + 3 Exercises",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Instagram strategy that actually works in 2025 for Nigerian photographers",
-            "Building a portfolio website on a budget",
-            "Getting featured in Nigerian media and publications",
-            "Exercise: Build your first portfolio site in one weekend",
-          ],
-        },
-        {
-          part: "Part Four — The Business of Photography",
-          num: "15",
-          title: "Ethics, Legal Considerations, and Professional Standards",
-          lessons: "4 Lessons + 1 Exercise",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Model releases and property releases in Nigeria",
-            "Copyright: who owns the photo?",
-            "Handling difficult clients professionally",
-            "Protecting your work online from theft",
-          ],
-        },
-        {
-          part: "Part Four — The Business of Photography",
-          num: "16",
-          title: "The Road Ahead",
-          lessons: "3 Lessons + 1 Exercise",
-          videoId: "YOUR_YOUTUBE_VIDEO_ID",
-          topics: [
-            "Building a 5-year photography career plan",
-            "Staying inspired: avoiding creative burnout",
-            "The Nigerian photography community: where to find your people",
-            "Your next 30 days: a concrete action plan",
-          ],
-        },
-      ];
-
-      // ── Auth guard ──
-      onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-          window.location.href = "login.html";
-          return;
-        }
-        const snap = await getDoc(doc(db, "paid_users", user.uid));
-        if (!snap.exists() || !snap.data().paid) {
-          window.location.href = "login.html";
-          return;
-        }
-        document.getElementById("authOverlay").style.display = "none";
+      // ── Auth guard — wait up to 5s for Firebase to restore session ──
+      let redirectTimer = setTimeout(() => { window.location.href = "login.html"; }, 5000);
+      onAuthStateChanged(auth, (user) => {
+        clearTimeout(redirectTimer);
+        if (!user) { window.location.href = "login.html"; return; }
+        document.getElementById("authOverlay").style.display  = "none";
+        document.getElementById("pageContent").style.display  = "block";
         document.getElementById("userEmailDisplay").textContent = user.email;
-        buildSidebar();
       });
 
-      // ── Logout ──
-      window.handleLogout = async function () {
+      window.handleLogout = async () => {
         await signOut(auth);
         window.location.href = "login.html";
       };
 
-      // ── Build sidebar ──
-      let currentPart = "";
-      function buildSidebar() {
-        const list = document.getElementById("chapterList");
-        CHAPTERS.forEach((ch, i) => {
-          if (ch.part !== currentPart) {
-            currentPart = ch.part;
-            const label = document.createElement("div");
-            label.className = "part-label";
-            label.textContent = ch.part;
-            list.appendChild(label);
-          }
-          const btn = document.createElement("button");
-          btn.className = "chapter-btn";
-          btn.id = `ch-btn-${i}`;
-          btn.innerHTML = `<span class="chapter-num">${ch.num}</span><span class="chapter-title">${ch.title}</span>`;
-          btn.onclick = () => {
-            loadChapter(i);
-            closeSidebar();
-          };
-          list.appendChild(btn);
+      // ══════════════════════════════════════════════════════════
+      // COURSE DATA
+      // Replace each videoId with your actual YouTube video ID.
+      // YouTube URL example: youtube.com/watch?v=dQw4w9WgXcQ
+      //   → videoId: "dQw4w9WgXcQ"
+      // desc: a short 1–2 sentence description shown on the card.
+      // ══════════════════════════════════════════════════════════
+      const PARTS = [
+        {
+          tag: "Part One",
+          title: "Foundations",
+          chapters: [
+            { num: "01", title: "Understanding Photography",       lessons: "4 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Discover what photography really is, explore the Nigerian photography lineage, and build the mindset every serious photographer needs." },
+            { num: "02", title: "Camera Types and Equipment",      lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Smartphone vs DSLR vs Mirrorless — get honest advice on what you actually need and how to buy smart in Nigeria." },
+            { num: "03", title: "The Exposure Triangle",           lessons: "6 Lessons + 5 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Master aperture, shutter speed, and ISO — and understand how they work together to give you full creative control." },
+            { num: "04", title: "Composition & Visual Storytelling", lessons: "7 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Learn the rules of composition, when to break them, and how to tell compelling visual stories with any camera." },
+            { num: "05", title: "Understanding Light",             lessons: "6 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Learn to read, use, and shape light — from golden hour in Lagos to dealing with harsh midday sun at outdoor events." },
+          ]
+        },
+        {
+          tag: "Part Two",
+          title: "Building Your Craft",
+          chapters: [
+            { num: "06", title: "Lenses and Creative Applications", lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Understand prime vs zoom, choose the right focal length for every job, and use lenses as a creative tool." },
+            { num: "07", title: "Post-Processing and Editing",      lessons: "6 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Build a fast, consistent editing workflow in Lightroom — including colour grading for Nigerian skin tones." },
+          ]
+        },
+        {
+          tag: "Part Three",
+          title: "Advanced Techniques",
+          chapters: [
+            { num: "08", title: "Genre Mastery",                     lessons: "8 Lessons + 4 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Deep-dive into weddings, portraits, street, and commercial photography in the Nigerian context." },
+            { num: "09", title: "Advanced Lighting Techniques",      lessons: "5 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Take control with off-camera flash, multi-light setups, and mixing strobe with ambient light at outdoor receptions." },
+            { num: "10", title: "Advanced Composition & Vision",     lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Develop your personal visual style, learn to sequence a photo essay, and find what makes your work unmistakably yours." },
+            { num: "11", title: "Advanced Post-Processing",          lessons: "5 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Master luminosity masking, frequency separation for skin, and delivering polished galleries to clients." },
+          ]
+        },
+        {
+          tag: "Part Four",
+          title: "The Business of Photography",
+          chapters: [
+            { num: "12", title: "Building Your Photography Business", lessons: "8 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Price your work correctly, write contracts that protect you, and land your first 10 clients without spending money on ads." },
+            { num: "13", title: "Scaling Your Photography Income",    lessons: "6 Lessons + 2 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Add passive income streams, build studio partnerships, and raise your rates without losing clients." },
+            { num: "14", title: "Digital Presence & Personal Brand",  lessons: "5 Lessons + 3 Exercises", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Build an Instagram strategy that works, create a portfolio website on a budget, and get featured in Nigerian media." },
+            { num: "15", title: "Ethics, Legal & Professional Standards", lessons: "4 Lessons + 1 Exercise", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Understand model releases, copyright, and how to handle difficult clients with professionalism and confidence." },
+            { num: "16", title: "The Road Ahead",                     lessons: "3 Lessons + 1 Exercise", videoId: "YOUR_YOUTUBE_VIDEO_ID", desc: "Build your 5-year career plan, stay inspired, and walk away with a concrete 30-day action plan." },
+          ]
+        },
+      ];
+
+      // ── Render cards ──
+      function buildThumb(ch) {
+        if (ch.videoId && ch.videoId !== "YOUR_YOUTUBE_VIDEO_ID") {
+          return `
+            <img src="https://img.youtube.com/vi/${ch.videoId}/maxresdefault.jpg"
+                 onerror="this.src='https://img.youtube.com/vi/${ch.videoId}/hqdefault.jpg'"
+                 alt="${ch.title}" loading="lazy" />
+            <div class="play-overlay"><div class="play-btn">▶</div></div>`;
+        }
+        return `
+          <div class="thumb-placeholder">
+            <div class="play-ring">▶</div>
+            <span>Coming Soon</span>
+          </div>`;
+      }
+
+      function renderCourse() {
+        const container = document.getElementById("courseRows");
+        PARTS.forEach(part => {
+          const cards = part.chapters.map(ch => `
+            <div class="card" onclick="openModal('${ch.videoId}','${ch.num}','${ch.title.replace(/'/g,"\\'")}','${ch.desc.replace(/'/g,"\\'")}','${part.tag} — ${part.title}','${ch.lessons}')">
+              <div class="card-thumb">
+                ${buildThumb(ch)}
+                <div class="chapter-badge">CH ${ch.num}</div>
+              </div>
+              <div class="card-body">
+                <div class="card-title">${ch.title}</div>
+                <div class="card-desc">${ch.desc}</div>
+                <div class="card-footer">
+                  <span class="lessons-badge">${ch.lessons}</span>
+                  <span class="watch-label">Watch →</span>
+                </div>
+              </div>
+            </div>
+          `).join("");
+
+          container.innerHTML += `
+            <div class="part-section">
+              <div class="part-header">
+                <div class="part-tag">${part.tag}</div>
+                <div class="part-title">${part.title}</div>
+              </div>
+              <div class="cards-row">${cards}</div>
+            </div>
+          `;
         });
       }
 
-      // ── Load chapter ──
-      let activeIndex = -1;
-      window.loadChapter = function (index) {
-        const ch = CHAPTERS[index];
-        activeIndex = index;
+      renderCourse();
 
-        // Update active state in sidebar
-        document
-          .querySelectorAll(".chapter-btn")
-          .forEach((b) => b.classList.remove("active"));
-        const activeBtn = document.getElementById(`ch-btn-${index}`);
-        if (activeBtn) {
-          activeBtn.classList.add("active");
-          activeBtn.scrollIntoView({ block: "nearest", behavior: "smooth" });
-        }
-
-        // Video
-        const wrapper = document.getElementById("videoWrapper");
-        if (ch.videoId && ch.videoId !== "YOUR_YOUTUBE_VIDEO_ID") {
-          wrapper.innerHTML = `<iframe src="https://www.youtube.com/embed/${ch.videoId}?rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>`;
-        } else {
-          wrapper.innerHTML = `<div class="video-placeholder"><div class="play-icon">▶</div><p>Video coming soon — add your YouTube ID in course.html</p></div>`;
-        }
-
-        // Chapter info
-        const topicsHTML = ch.topics.map((t) => `<li>${t}</li>`).join("");
-        document.getElementById("chapterInfo").innerHTML = `
-          <div class="chapter-meta">
-            <span class="part-tag">${ch.part}</span>
-            <span class="lessons-tag">${ch.lessons}</span>
-          </div>
-          <h1 class="chapter-title-main">Chapter ${ch.num}: ${ch.title}</h1>
-          <div class="topics-heading">What You'll Learn</div>
-          <ul class="topics-list">${topicsHTML}</ul>
-        `;
-
-        // Navigation
-        const nav = document.getElementById("chapterNav");
-        nav.style.display = "flex";
-
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-        const prevTitle = document.getElementById("prevTitle");
-        const nextTitle = document.getElementById("nextTitle");
-
-        if (index > 0) {
-          prevBtn.disabled = false;
-          prevTitle.textContent = `Chapter ${CHAPTERS[index - 1].num}: ${
-            CHAPTERS[index - 1].title
-          }`;
-        } else {
-          prevBtn.disabled = true;
-          prevTitle.textContent = "";
-        }
-        if (index < CHAPTERS.length - 1) {
-          nextBtn.disabled = false;
-          nextTitle.textContent = `Chapter ${CHAPTERS[index + 1].num}: ${
-            CHAPTERS[index + 1].title
-          }`;
-        } else {
-          nextBtn.disabled = true;
-          nextTitle.textContent = "";
-        }
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      // ── Modal ──
+      window.openModal = (videoId, num, title, desc, partLabel, lessons) => {
+        const hasVideo = videoId && videoId !== "YOUR_YOUTUBE_VIDEO_ID";
+        document.getElementById("modalVideo").innerHTML = hasVideo
+          ? `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media"></iframe>`
+          : `<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0d0d0d;gap:10px;"><div style="font-size:32px;color:#2a2a2a;">▶</div><p style="font-size:13px;color:#444;">Video not added yet</p></div>`;
+        document.getElementById("modalTag").textContent   = `Chapter ${num} · ${partLabel} · ${lessons}`;
+        document.getElementById("modalTitle").textContent = title;
+        document.getElementById("modalDesc").textContent  = desc;
+        document.getElementById("modalOverlay").classList.add("open");
+        document.body.style.overflow = "hidden";
       };
 
-      window.navigate = function (direction) {
-        const next = activeIndex + direction;
-        if (next >= 0 && next < CHAPTERS.length) loadChapter(next);
+      window.closeModal = (e) => {
+        if (e.target === document.getElementById("modalOverlay")) stopModal();
       };
+      window.closeModalBtn = () => stopModal();
 
-      // ── Mobile sidebar ──
-      window.toggleSidebar = () => {
-        document.getElementById("sidebar").classList.toggle("open");
-        document.getElementById("sidebarOverlay").classList.toggle("visible");
-      };
-      window.closeSidebar = () => {
-        document.getElementById("sidebar").classList.remove("open");
-        document.getElementById("sidebarOverlay").classList.remove("visible");
-      };
+      function stopModal() {
+        document.getElementById("modalOverlay").classList.remove("open");
+        document.getElementById("modalVideo").innerHTML = "";
+        document.body.style.overflow = "";
+      }
 
-      // Auto-load first chapter
-      setTimeout(() => loadChapter(0), 100);
+      // Close with Escape key
+      document.addEventListener("keydown", e => { if (e.key === "Escape") stopModal(); });
     </script>
   </body>
 </html>
