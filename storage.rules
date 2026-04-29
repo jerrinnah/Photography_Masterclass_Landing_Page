@@ -1,0 +1,27 @@
+// ═══════════════════════════════════════════════════════
+// FIREBASE STORAGE RULES — eBook gating
+// Paste these into Firebase Console:
+//   Storage → Rules tab → replace existing rules → Publish
+// Project: masterclass-6cf9e
+// ═══════════════════════════════════════════════════════
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // eBook folder: only signed-in users with paid: true in
+    // paid_users/{uid} can read. Nobody can write from the client —
+    // upload via Firebase Console only.
+    match /ebook/{allPaths=**} {
+      allow read: if request.auth != null
+        && firestore.exists(/databases/(default)/documents/paid_users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/paid_users/$(request.auth.uid)).data.paid == true;
+      allow write: if false;
+    }
+
+    // Default deny everything else.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

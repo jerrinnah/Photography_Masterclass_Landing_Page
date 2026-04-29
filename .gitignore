@@ -1,2 +1,28 @@
+# ── OS metadata ──
 .DS_Store
+__MACOSX/
+Thumbs.db
+
+# ── Server logs ──
+error_log
+*.log
+
+# ── Secrets / config (NEVER commit live keys) ──
 config.php
+.env
+.env.*
+!.env.example
+
+# ── Editor ──
+.vscode/
+.idea/
+*.swp
+*~
+
+# ── Dependency dirs (not currently used, but ignore in case) ──
+node_modules/
+
+# ── Local builds / temp ──
+*.tmp
+*.bak
+*.cache

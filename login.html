@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Jay Masterclass</title>
+    <title>Login | NEJ Masterclass</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <!-- Facebook Pixel -->
     <script>
@@ -15,10 +15,10 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '517290012136807');
+      fbq('init', '1439204833875332');
       fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1439204833875332&ev=PageView&noscript=1"/></noscript>
     <!-- End Facebook Pixel -->
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -151,7 +151,7 @@
   </head>
   <body>
     <div class="card">
-      <div class="logo">Jay Masterclass</div>
+      <div class="logo">NEJ Masterclass</div>
       <div class="tagline">The Complete Photography Course</div>
 
       <!-- Loading state while checking auth -->
@@ -184,22 +184,77 @@
         <button class="btn" id="loginBtn" onclick="handleLogin()">Sign In to Course</button>
 
         <div class="divider">—</div>
-        <p class="enrol-link">Don't have access yet? <a href="index.html">Enrol in the course →</a></p>
+        <p class="enrol-link">Don't have access yet? <a href="/">Enrol in the course →</a></p>
       </div>
     </div>
 
     <script type="module">
       import { initializeApp }                                           from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      import firebaseConfig from "./firebase-config.js";
+      import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+      const firebaseConfig = {
+        apiKey:            "AIzaSyCC2BBlbG6HgX48ozJGuh9v2WsTkMTtUrA",
+        authDomain:        "masterclass-6cf9e.firebaseapp.com",
+        projectId:         "masterclass-6cf9e",
+        storageBucket:     "masterclass-6cf9e.firebasestorage.app",
+        messagingSenderId: "423647132415",
+        appId:             "1:423647132415:web:cb8ecc129efecbe1dbeaca",
+        measurementId:     "G-S832XE2ZYE"
+      };
 
       const app  = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const db   = getFirestore(app);
 
-      // If already logged in → go straight to course
+      // ── Device helpers ──
+      function getDeviceId() {
+        let id = localStorage.getItem("jm_device_id");
+        if (!id) {
+          id = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+          localStorage.setItem("jm_device_id", id);
+        }
+        return id;
+      }
+
+      function getDeviceName() {
+        const ua = navigator.userAgent;
+        let browser = "Browser";
+        if (ua.includes("Firefox"))      browser = "Firefox";
+        else if (ua.includes("Edg"))     browser = "Edge";
+        else if (ua.includes("Chrome"))  browser = "Chrome";
+        else if (ua.includes("Safari"))  browser = "Safari";
+        let os = "Unknown";
+        if (ua.includes("Windows"))                           os = "Windows";
+        else if (ua.includes("iPhone") || ua.includes("iPad")) os = "iOS";
+        else if (ua.includes("Android"))                      os = "Android";
+        else if (ua.includes("Mac"))                          os = "Mac";
+        else if (ua.includes("Linux"))                        os = "Linux";
+        return `${browser} on ${os}`;
+      }
+
+      async function getClientIP() {
+        try {
+          const r = await fetch("get-ip.php");
+          const d = await r.json();
+          return d.ip || null;
+        } catch { return null; }
+      }
+
+      // Read optional ?next= redirect target (defaults to "course" so
+      // existing video-course flows are unchanged). The eBook page links
+      // here with ?next=ebook so paid users land on the download.
+      // Allowlist guards against open-redirect abuse.
+      function getNextDestination() {
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get("next");
+        const allowed = ["course", "ebook"];
+        return allowed.includes(next) ? next : "course";
+      }
+
+      // If already logged in → go to the requested destination
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          window.location.href = "course.html";
+          window.location.href = getNextDestination();
           return;
         }
         document.getElementById("checkingState").style.display = "none";
@@ -240,8 +295,71 @@
         btn.disabled    = true;
 
         try {
-          await signInWithEmailAndPassword(auth, email, password);
-          window.location.href = "course.html";
+          const cred = await signInWithEmailAndPassword(auth, email, password);
+          const user = cred.user;
+
+          // ── Device & IP security check ──
+          btn.textContent = "Checking access...";
+          const deviceId   = getDeviceId();
+          const deviceName = getDeviceName();
+          const clientIp   = await getClientIP();
+
+          try {
+            const snap = await getDoc(doc(db, "paid_users", user.uid));
+            if (snap.exists()) {
+              const data      = snap.data();
+              const devices   = data.devices   || [];
+              const allowedIp = data.allowedIp || "";
+
+              // ── IP check → trigger email reverification ──
+              if (clientIp && allowedIp && allowedIp !== clientIp) {
+                try {
+                  // Generate a 24-hour verification token while still authenticated
+                  const token     = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+                  const expiresAt = Date.now() + 24 * 60 * 60 * 1000;
+                  await updateDoc(doc(db, "paid_users", user.uid), {
+                    pendingIpVerify: { token, newIp: clientIp, expiresAt, email }
+                  });
+                  // Build verification link (same directory as login.html)
+                  const base = window.location.href.replace(/[^/]*$/, "");
+                  const verifyUrl = `${base}verify-ip.html?uid=${encodeURIComponent(user.uid)}&token=${encodeURIComponent(token)}&e=${btoa(email)}`;
+                  fetch(`send-ip-verify.php?email=${encodeURIComponent(email)}&name=${encodeURIComponent(data.name || email)}&link=${encodeURIComponent(verifyUrl)}&ip=${encodeURIComponent(clientIp)}`).catch(() => {});
+                } catch (e) { console.warn("Verify token save failed:", e.code); }
+
+                await signOut(auth);
+                loginErr.style.color = "#c8a24e";
+                loginErr.innerHTML = `📧 <strong>New location detected.</strong><br>A verification link has been sent to <strong>${email}</strong>. Click the link in your email to approve access from this new location.`;
+                loginErr.style.display = "block";
+                btn.textContent = "Sign In to Course"; btn.disabled = false;
+                return;
+              }
+
+              // ── Device limit check ──
+              const knownDevice = devices.find(d => d.id === deviceId);
+              if (!knownDevice && devices.length >= 2) {
+                await signOut(auth);
+                loginErr.textContent = "Device limit reached. This account is already active on 2 devices. Contact your instructor to reset access.";
+                loginErr.style.display = "block";
+                btn.textContent = "Sign In to Course"; btn.disabled = false;
+                return;
+              }
+
+              // ── Register / update device and IP ──
+              const now = new Date().toISOString();
+              const updatedDevices = knownDevice
+                ? devices.map(d => d.id === deviceId ? { ...d, lastSeen: now } : d)
+                : [...devices, { id: deviceId, name: deviceName, lastSeen: now }];
+
+              const updates = { devices: updatedDevices };
+              if (clientIp && !allowedIp) updates.allowedIp = clientIp;
+              await updateDoc(doc(db, "paid_users", user.uid), updates);
+            }
+          } catch (secErr) {
+            // Fail open — don't block login if security check itself errors
+            console.warn("Security check skipped:", secErr.code);
+          }
+
+          window.location.href = getNextDestination();
         } catch (err) {
           btn.textContent = "Sign In to Course";
           btn.disabled    = false;

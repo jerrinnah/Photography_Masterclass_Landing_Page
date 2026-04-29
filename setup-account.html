@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Setting Up Your Account | Jay Masterclass</title>
+    <title>Create Your Account | NEJ Masterclass</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <!-- Facebook Pixel -->
     <script>
@@ -15,10 +15,10 @@
       t.src=v;s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '517290012136807');
+      fbq('init', '1439204833875332');
       fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=517290012136807&ev=PageView&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1439204833875332&ev=PageView&noscript=1"/></noscript>
     <!-- End Facebook Pixel -->
     <style>
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,12 +39,12 @@
         padding: 48px 40px;
         width: 100%;
         max-width: 440px;
-        text-align: center;
       }
       .logo {
         font-family: "Playfair Display", serif;
         font-size: 22px;
         color: #c8a24e;
+        text-align: center;
         margin-bottom: 6px;
       }
       .tagline {
@@ -52,90 +52,52 @@
         color: #444;
         letter-spacing: 2px;
         text-transform: uppercase;
-        margin-bottom: 40px;
+        text-align: center;
+        margin-bottom: 36px;
       }
-
-      /* ── States ── */
-      .state { display: none; }
-      .state.active { display: block; }
-
-      /* Loading */
-      .spinner {
-        width: 48px; height: 48px;
-        border: 3px solid #1e1e1e;
-        border-top-color: #c8a24e;
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-        margin: 0 auto 20px;
-      }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      .loading-text { font-size: 15px; color: #666; }
-      .loading-step {
-        font-size: 13px;
-        color: #444;
-        margin-top: 8px;
-        min-height: 20px;
-        transition: opacity 0.3s;
-      }
-
-      /* Success */
-      .success-icon {
-        width: 64px; height: 64px;
-        background: rgba(200,162,78,0.08);
-        border: 2px solid rgba(200,162,78,0.4);
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 20px;
-        font-size: 26px;
+      .step-label {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
         color: #c8a24e;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 10px;
       }
-      .success-title {
+      h1 {
         font-family: "Playfair Display", serif;
         font-size: 24px;
         font-weight: 700;
-        margin-bottom: 10px;
+        text-align: center;
+        margin-bottom: 6px;
       }
-      .success-sub { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 24px; }
-
-      .credentials-box {
+      .subtitle { font-size: 14px; color: #666; text-align: center; margin-bottom: 28px; line-height: 1.6; }
+      .form-group { margin-bottom: 18px; }
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      input {
+        width: 100%;
         background: #161616;
         border: 1px solid #1e1e1e;
         border-radius: 10px;
-        padding: 16px 20px;
-        margin-bottom: 24px;
-        text-align: left;
+        padding: 14px 16px;
+        font-size: 15px;
+        color: #f5f0eb;
+        font-family: "DM Sans", sans-serif;
+        outline: none;
+        transition: border-color 0.2s;
       }
-      .cred-label {
-        font-size: 10px;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #555;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-      .cred-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-        font-size: 13px;
-      }
-      .cred-row:last-child { margin-bottom: 0; }
-      .cred-key { color: #555; }
-      .cred-val { color: #f5f0eb; font-weight: 500; word-break: break-all; text-align: right; max-width: 60%; }
-      .cred-val.gold { color: #c8a24e; }
-
-      .note {
-        font-size: 12px;
-        color: #444;
-        background: rgba(200,162,78,0.04);
-        border: 1px solid rgba(200,162,78,0.08);
-        border-radius: 8px;
-        padding: 10px 14px;
-        line-height: 1.6;
-        margin-bottom: 24px;
-      }
-
+      input:focus { border-color: #c8a24e; }
+      input.error { border-color: #e55; }
+      .error-msg { font-size: 13px; color: #e55; margin-top: 6px; display: none; }
+      .hint { font-size: 12px; color: #444; margin-top: 6px; }
       .btn {
         width: 100%;
         padding: 16px;
@@ -148,56 +110,116 @@
         font-weight: 700;
         cursor: pointer;
         transition: opacity 0.2s, transform 0.1s;
+        margin-top: 8px;
       }
       .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+      .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-      /* Error */
-      .error-icon {
+      /* States */
+      .state { display: none; }
+      .state.active { display: block; }
+
+      /* Loading */
+      .loading-state { text-align: center; padding: 20px 0; }
+      .spinner {
+        width: 44px; height: 44px;
+        border: 3px solid #1e1e1e;
+        border-top-color: #c8a24e;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 16px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .loading-step { font-size: 14px; color: #555; }
+
+      /* Success */
+      .success-icon {
         width: 64px; height: 64px;
-        background: rgba(229,85,85,0.08);
-        border: 2px solid rgba(229,85,85,0.3);
+        background: rgba(200,162,78,0.08);
+        border: 2px solid rgba(200,162,78,0.4);
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         margin: 0 auto 20px;
-        font-size: 26px;
-        color: #e55;
+        font-size: 26px; color: #c8a24e;
       }
-      .error-title {
+      .success-title {
         font-family: "Playfair Display", serif;
-        font-size: 22px;
-        color: #e55;
-        margin-bottom: 10px;
+        font-size: 24px; font-weight: 700;
+        text-align: center; margin-bottom: 8px;
       }
-      .error-sub { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 24px; }
-      .back-link {
-        font-size: 14px;
-        color: #c8a24e;
-        text-decoration: none;
-        border-bottom: 1px solid rgba(200,162,78,0.3);
+      .success-sub { font-size: 14px; color: #666; text-align: center; margin-bottom: 24px; line-height: 1.6; }
+      .credentials-box {
+        background: #161616;
+        border: 1px solid #1e1e1e;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin-bottom: 20px;
       }
-      .back-link:hover { border-color: #c8a24e; }
+      .cred-label {
+        font-size: 10px; letter-spacing: 2px;
+        text-transform: uppercase; color: #555;
+        font-weight: 600; margin-bottom: 12px;
+      }
+      .cred-row {
+        display: flex; justify-content: space-between;
+        align-items: center; margin-bottom: 8px; font-size: 13px;
+      }
+      .cred-row:last-child { margin-bottom: 0; }
+      .cred-key { color: #555; }
+      .cred-val { color: #f5f0eb; font-weight: 500; word-break: break-all; text-align: right; max-width: 65%; }
+      .cred-val.gold { color: #c8a24e; }
+      .note {
+        font-size: 12px; color: #444;
+        background: rgba(200,162,78,0.04);
+        border: 1px solid rgba(200,162,78,0.08);
+        border-radius: 8px; padding: 10px 14px;
+        line-height: 1.6; margin-bottom: 20px; text-align: center;
+      }
+      .redirect-note { font-size: 12px; color: #333; text-align: center; margin-top: 10px; }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="logo">Jay Masterclass</div>
+      <div class="logo">NEJ Masterclass</div>
       <div class="tagline">The Complete Photography Course</div>
 
-      <!-- Loading -->
-      <div class="state active" id="stateLoading">
-        <div class="spinner"></div>
-        <p class="loading-text">Setting up your account...</p>
-        <p class="loading-step" id="loadingStep">Verifying your payment</p>
+      <!-- Form state -->
+      <div class="state active" id="stateForm">
+        <div class="step-label">Payment Received ✓</div>
+        <h1>Create Your Account</h1>
+        <p class="subtitle">Enter the email address you used to pay on Paystack to activate your access.</p>
+
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="nameInput" placeholder="Your full name" />
+          <div class="error-msg" id="nameError"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="emailInput" placeholder="The email you paid with" />
+          <div class="error-msg" id="emailError"></div>
+        </div>
+
+        <div class="error-msg" id="generalError" style="margin-bottom:12px;"></div>
+        <button class="btn" id="submitBtn" onclick="createAccount()">Activate My Account →</button>
       </div>
 
-      <!-- Success -->
+      <!-- Loading state -->
+      <div class="state" id="stateLoading">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p class="loading-step" id="loadingStep">Creating your account...</p>
+        </div>
+      </div>
+
+      <!-- Success state -->
       <div class="state" id="stateSuccess">
         <div class="success-icon">✓</div>
         <div class="success-title">You're in!</div>
-        <p class="success-sub">Your account has been created and you've been signed in automatically.</p>
-
+        <p class="success-sub">Your account is ready. Save your login details below.</p>
         <div class="credentials-box">
-          <div class="cred-label">Save Your Login Details</div>
+          <div class="cred-label">Your Login Details</div>
           <div class="cred-row">
             <span class="cred-key">Email</span>
             <span class="cred-val" id="displayEmail">—</span>
@@ -207,29 +229,55 @@
             <span class="cred-val gold" id="displayPassword">—</span>
           </div>
         </div>
-
-        <div class="note">
-          💡 Your password is your email address. You can change it anytime on the login page.
-        </div>
-
-        <button class="btn" onclick="goToCourse()">Go to My Course →</button>
-        <p style="font-size:12px; color:#444; margin-top:12px;">Redirecting automatically in <span id="redirectCount">5</span>s…</p>
-      </div>
-
-      <!-- Error -->
-      <div class="state" id="stateError">
-        <div class="error-icon">✗</div>
-        <div class="error-title">Payment Not Found</div>
-        <p class="error-sub" id="errorMsg">We couldn't verify your payment. If you believe this is a mistake, please contact us with your Paystack receipt.</p>
-        <a href="index.html" class="back-link">← Back to the course page</a>
+        <div class="note">Your password is your email address. You can change it anytime from the login page.</div>
+        <button class="btn" onclick="window.location.href='/course'">Go to My Course →</button>
+        <p class="redirect-note">Redirecting in <span id="countdown">5</span>s…</p>
       </div>
     </div>
 
     <script type="module">
-      import { initializeApp }        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
       import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-      import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-      import firebaseConfig from "./firebase-config.js";
+      import { getFirestore, doc, setDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      // ── Device helpers ──
+      function getDeviceId() {
+        let id = localStorage.getItem("jm_device_id");
+        if (!id) {
+          id = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + Math.random().toString(36).slice(2);
+          localStorage.setItem("jm_device_id", id);
+        }
+        return id;
+      }
+      function getDeviceName() {
+        const ua = navigator.userAgent;
+        let browser = "Browser";
+        if (ua.includes("Firefox"))      browser = "Firefox";
+        else if (ua.includes("Edg"))     browser = "Edge";
+        else if (ua.includes("Chrome"))  browser = "Chrome";
+        else if (ua.includes("Safari"))  browser = "Safari";
+        let os = "Unknown";
+        if (ua.includes("Windows"))                            os = "Windows";
+        else if (ua.includes("iPhone") || ua.includes("iPad")) os = "iOS";
+        else if (ua.includes("Android"))                       os = "Android";
+        else if (ua.includes("Mac"))                           os = "Mac";
+        else if (ua.includes("Linux"))                         os = "Linux";
+        return `${browser} on ${os}`;
+      }
+      async function getClientIP() {
+        try { const r = await fetch("get-ip.php"); const d = await r.json(); return d.ip || null; }
+        catch { return null; }
+      }
+
+      const firebaseConfig = {
+        apiKey:            "AIzaSyCC2BBlbG6HgX48ozJGuh9v2WsTkMTtUrA",
+        authDomain:        "masterclass-6cf9e.firebaseapp.com",
+        projectId:         "masterclass-6cf9e",
+        storageBucket:     "masterclass-6cf9e.firebasestorage.app",
+        messagingSenderId: "423647132415",
+        appId:             "1:423647132415:web:cb8ecc129efecbe1dbeaca",
+        measurementId:     "G-S832XE2ZYE"
+      };
 
       const app  = initializeApp(firebaseConfig);
       const auth = getAuth(app);
@@ -239,105 +287,112 @@
         document.querySelectorAll(".state").forEach(s => s.classList.remove("active"));
         document.getElementById(id).classList.add("active");
       }
-      function setStep(text) {
-        document.getElementById("loadingStep").textContent = text;
-      }
 
-      // ── Main flow ──
-      async function run() {
-        const params    = new URLSearchParams(window.location.search);
-        const reference = params.get("reference") || params.get("trxref");
+      window.createAccount = async function () {
+        const nameInput   = document.getElementById("nameInput");
+        const emailInput  = document.getElementById("emailInput");
+        const nameError   = document.getElementById("nameError");
+        const emailError  = document.getElementById("emailError");
+        const generalError = document.getElementById("generalError");
+        const name  = nameInput.value.trim();
+        const email = emailInput.value.trim().toLowerCase();
 
-        if (!reference) {
-          showState("stateError");
-          document.getElementById("errorMsg").textContent = "No payment reference found. Please complete payment first.";
+        nameError.style.display    = "none";
+        emailError.style.display   = "none";
+        generalError.style.display = "none";
+        nameInput.classList.remove("error");
+        emailInput.classList.remove("error");
+
+        if (!name) {
+          nameError.textContent   = "Enter your full name";
+          nameError.style.display = "block";
+          nameInput.classList.add("error");
           return;
         }
 
-        // Step 1 — verify payment
-        setStep("Verifying your payment...");
-        let email;
-        try {
-          const res  = await fetch(`verify-payment.php?reference=${encodeURIComponent(reference)}`);
-          const data = await res.json();
-          if (!data.status) {
-            showState("stateError");
-            document.getElementById("errorMsg").textContent = data.message || "Payment could not be verified.";
-            return;
-          }
-          email = data.email.trim().toLowerCase();
-          // Track Purchase in Facebook Pixel
-          if (typeof fbq === "function") fbq("track", "Purchase", { value: data.amount, currency: "NGN" });
-        } catch {
-          showState("stateError");
-          document.getElementById("errorMsg").textContent = "Could not reach the payment server. Please try again.";
+        if (!email || !email.includes("@") || !email.includes(".")) {
+          emailError.textContent  = "Enter a valid email address";
+          emailError.style.display = "block";
+          emailInput.classList.add("error");
           return;
         }
 
-        // Step 2 — create Firebase account (password = email)
-        setStep("Creating your account...");
+        showState("stateLoading");
         const password = email;
-        let uid = null;
 
         try {
-          const userCred = await createUserWithEmailAndPassword(auth, email, password);
-          uid = userCred.user.uid;
-        } catch (err) {
-          if (err.code === "auth/email-already-in-use") {
-            // Account exists — sign them in instead
-            setStep("Signing you in...");
-            try {
-              const userCred = await signInWithEmailAndPassword(auth, email, password);
-              uid = userCred.user.uid;
-            } catch {
-              showState("stateError");
-              document.getElementById("errorMsg").textContent = "Account already exists but sign-in failed. Please use the login page.";
-              return;
+          document.getElementById("loadingStep").textContent = "Creating your account...";
+          let uid;
+          try {
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            uid = cred.user.uid;
+          } catch (err) {
+            if (err.code === "auth/email-already-in-use") {
+              document.getElementById("loadingStep").textContent = "Signing you in...";
+              const cred = await signInWithEmailAndPassword(auth, email, password);
+              uid = cred.user.uid;
+            } else {
+              throw err;
             }
-          } else {
-            showState("stateError");
-            document.getElementById("errorMsg").textContent = "Could not create your account. Please contact support.";
-            return;
           }
+
+          // Save to Firestore
+          document.getElementById("loadingStep").textContent = "Activating your access...";
+          try {
+            const deviceId   = getDeviceId();
+            const deviceName = getDeviceName();
+            const clientIp   = await getClientIP();
+            const now = new Date().toISOString();
+            await setDoc(doc(db, "paid_users", uid), {
+              email, uid, name, paid: true, createdAt: serverTimestamp(),
+              devices: [{ id: deviceId, name: deviceName, lastSeen: now }],
+              ...(clientIp ? { allowedIp: clientIp } : {})
+            });
+          } catch (fsErr) {
+            console.error("Firestore error:", fsErr.code, fsErr.message);
+            // Show error on screen so we can diagnose
+            document.getElementById("loadingStep").textContent = "Firestore error: " + fsErr.code + " — " + fsErr.message;
+            await new Promise(r => setTimeout(r, 4000)); // pause so user can read it
+          }
+
+          // Wait for auth to fully persist before redirecting
+          await new Promise(r => setTimeout(r, 1500));
+
+          document.getElementById("displayEmail").textContent    = email;
+          document.getElementById("displayPassword").textContent = email;
+          showState("stateSuccess");
+
+          if (typeof fbq === "function") fbq("track", "Lead");
+
+          // Countdown redirect
+          let n = 5;
+          const timer = setInterval(() => {
+            n--;
+            const el = document.getElementById("countdown");
+            if (el) el.textContent = n;
+            if (n <= 0) { clearInterval(timer); window.location.href = "/course"; }
+          }, 1000);
+
+        } catch (err) {
+          showState("stateForm");
+          const generalError = document.getElementById("generalError");
+          if (err.code === "auth/invalid-email") {
+            generalError.textContent = "Invalid email address. Please check and try again.";
+          } else if (err.code === "auth/wrong-password") {
+            generalError.textContent = "An account with this email already exists with a different password. Please use the login page.";
+          } else {
+            generalError.textContent = "Error: " + (err.code || err.message || "unknown");
+          }
+          generalError.style.display = "block";
         }
+      };
 
-        // Step 3 — save to Firestore (separate try so it never blocks the redirect)
-        setStep("Saving your access...");
-        try {
-          await setDoc(doc(db, "paid_users", uid), {
-            email:     email,
-            uid:       uid,
-            paid:      true,
-            reference: reference,
-            createdAt: serverTimestamp(),
-          });
-        } catch {
-          // Firestore write failed (likely security rules) — continue anyway
-          // Fix this by updating Firestore rules in Firebase console
-          console.warn("Firestore write failed — check security rules.");
+      // Allow Enter key
+      document.addEventListener("keydown", e => {
+        if (e.key === "Enter" && document.getElementById("stateForm").classList.contains("active")) {
+          window.createAccount();
         }
-
-        // Step 4 — wait briefly so Firebase auth state fully persists, then show success
-        setStep("Almost done...");
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        document.getElementById("displayEmail").textContent    = email;
-        document.getElementById("displayPassword").textContent = email;
-        showState("stateSuccess");
-
-        // Auto-redirect after 5 seconds with countdown
-        let count = 5;
-        const countEl = document.getElementById("redirectCount");
-        const timer = setInterval(() => {
-          count--;
-          if (countEl) countEl.textContent = count;
-          if (count <= 0) { clearInterval(timer); window.location.href = "course.html"; }
-        }, 1000);
-      }
-
-      window.goToCourse = () => { window.location.href = "course.html"; };
-
-      run();
+      });
     </script>
   </body>
 </html>

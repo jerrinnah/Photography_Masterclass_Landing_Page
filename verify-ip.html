@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify New Location | NEJ Masterclass</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: #0a0a0a; color: #f5f0eb;
+        font-family: "DM Sans", sans-serif;
+        min-height: 100vh; display: flex;
+        align-items: center; justify-content: center; padding: 24px;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card {
+        background: #111; border: 1px solid #1e1e1e; border-radius: 16px;
+        padding: 48px 40px; width: 100%; max-width: 440px; text-align: center;
+      }
+      .logo { font-family: "Playfair Display", serif; font-size: 20px; color: #c8a24e; margin-bottom: 4px; }
+      .logo-sub { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #444; margin-bottom: 36px; }
+      .icon-wrap {
+        width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 20px;
+        display: flex; align-items: center; justify-content: center; font-size: 32px;
+      }
+      .icon-wrap.pending  { background: rgba(200,162,78,0.08); border: 2px solid rgba(200,162,78,0.3); }
+      .icon-wrap.success  { background: rgba(109,200,109,0.08); border: 2px solid rgba(109,200,109,0.3); }
+      .icon-wrap.error    { background: rgba(229,85,85,0.08);   border: 2px solid rgba(229,85,85,0.3); }
+      .icon-wrap.loading  { background: #161616; border: 2px solid #1e1e1e; }
+      h1 { font-family: "Playfair Display", serif; font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+      .sub { font-size: 14px; color: #666; line-height: 1.7; margin-bottom: 24px; }
+      .ip-box {
+        background: #161616; border: 1px solid #1e1e1e; border-radius: 10px;
+        padding: 14px 18px; margin-bottom: 24px; text-align: left;
+      }
+      .ip-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #555; font-weight: 600; margin-bottom: 6px; }
+      .ip-val { font-size: 15px; color: #c8a24e; font-weight: 700; font-family: monospace; }
+      .btn {
+        width: 100%; padding: 15px; background: #c8a24e; color: #0a0a0a;
+        border: none; border-radius: 10px; font-family: "DM Sans", sans-serif;
+        font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s;
+      }
+      .btn:hover { opacity: 0.88; }
+      .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+      .btn-outline {
+        width: 100%; padding: 13px; background: none; border: 1px solid #1e1e1e;
+        border-radius: 10px; color: #666; font-family: "DM Sans", sans-serif;
+        font-size: 14px; cursor: pointer; margin-top: 10px; transition: color 0.2s, border-color 0.2s;
+      }
+      .btn-outline:hover { color: #f5f0eb; border-color: #444; }
+      .err { font-size: 13px; color: #e55; margin-top: 12px; display: none; }
+      .spinner {
+        width: 36px; height: 36px; border: 3px solid #1e1e1e;
+        border-top-color: #c8a24e; border-radius: 50%;
+        animation: spin 0.8s linear infinite; margin: 0 auto;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .state { display: none; }
+      .state.active { display: block; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="logo">NEJ Masterclass</div>
+      <div class="logo-sub">Security Verification</div>
+
+      <!-- Loading state -->
+      <div class="state active" id="stateLoading">
+        <div class="icon-wrap loading"><div class="spinner"></div></div>
+        <h1>Verifying...</h1>
+        <p class="sub">Please wait while we check your verification link.</p>
+      </div>
+
+      <!-- Confirm state -->
+      <div class="state" id="stateConfirm">
+        <div class="icon-wrap pending">🔐</div>
+        <h1>New Location Detected</h1>
+        <p class="sub">A sign-in was attempted from a new IP address. Click below to approve access from this location.</p>
+        <div class="ip-box">
+          <div class="ip-label">New IP Address</div>
+          <div class="ip-val" id="displayIp">—</div>
+        </div>
+        <button class="btn" id="approveBtn" onclick="approveIp()">✓ Approve This Location</button>
+        <button class="btn-outline" onclick="window.location.href='/login'">Cancel</button>
+        <div class="err" id="approveErr"></div>
+      </div>
+
+      <!-- Success state -->
+      <div class="state" id="stateSuccess">
+        <div class="icon-wrap success">✓</div>
+        <h1>Location Approved!</h1>
+        <p class="sub">Your new location has been verified. You can now sign in normally.</p>
+        <button class="btn" onclick="window.location.href='/login'">Go to Sign In →</button>
+      </div>
+
+      <!-- Error state -->
+      <div class="state" id="stateError">
+        <div class="icon-wrap error">✕</div>
+        <h1>Link Expired or Invalid</h1>
+        <p class="sub" id="errorMsg">This verification link has expired or has already been used. Please sign in again to receive a new one.</p>
+        <button class="btn" onclick="window.location.href='/login'">Back to Sign In</button>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp }     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword, signOut }
+        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+      import { getFirestore, doc, getDoc, updateDoc, deleteField }
+        from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey:            "AIzaSyCC2BBlbG6HgX48ozJGuh9v2WsTkMTtUrA",
+        authDomain:        "masterclass-6cf9e.firebaseapp.com",
+        projectId:         "masterclass-6cf9e",
+        storageBucket:     "masterclass-6cf9e.firebasestorage.app",
+        messagingSenderId: "423647132415",
+        appId:             "1:423647132415:web:cb8ecc129efecbe1dbeaca",
+        measurementId:     "G-S832XE2ZYE"
+      };
+
+      const app  = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db   = getFirestore(app);
+
+      function showState(id) {
+        document.querySelectorAll(".state").forEach(s => s.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+      }
+
+      // ── Parse URL params ──
+      const params = new URLSearchParams(window.location.search);
+      const uid    = params.get("uid")   || "";
+      const token  = params.get("token") || "";
+      const eB64   = params.get("e")     || "";
+
+      let verifiedEmail = "";
+      let verifiedNewIp = "";
+
+      async function init() {
+        if (!uid || !token || !eB64) {
+          document.getElementById("errorMsg").textContent = "Invalid verification link. Please sign in again.";
+          showState("stateError"); return;
+        }
+
+        try {
+          verifiedEmail = atob(eB64);
+        } catch {
+          document.getElementById("errorMsg").textContent = "Malformed verification link.";
+          showState("stateError"); return;
+        }
+
+        try {
+          // Sign in temporarily to read the document
+          const cred = await signInWithEmailAndPassword(auth, verifiedEmail, verifiedEmail);
+          const snap = await getDoc(doc(db, "paid_users", cred.user.uid));
+
+          if (!snap.exists()) {
+            await signOut(auth);
+            document.getElementById("errorMsg").textContent = "Account not found.";
+            showState("stateError"); return;
+          }
+
+          const data   = snap.data();
+          const verify = data.pendingIpVerify;
+
+          if (!verify || verify.token !== token) {
+            await signOut(auth);
+            document.getElementById("errorMsg").textContent = "This verification link is invalid or has already been used.";
+            showState("stateError"); return;
+          }
+
+          if (Date.now() > verify.expiresAt) {
+            await signOut(auth);
+            document.getElementById("errorMsg").textContent = "This verification link has expired (24 hour limit). Please sign in again to receive a new one.";
+            showState("stateError"); return;
+          }
+
+          verifiedNewIp = verify.newIp || "";
+          document.getElementById("displayIp").textContent = verifiedNewIp || "Unknown";
+
+          // Sign back out — user will re-sign in via approveIp
+          await signOut(auth);
+          showState("stateConfirm");
+
+        } catch (e) {
+          document.getElementById("errorMsg").textContent = "Could not validate link: " + (e.code || e.message);
+          showState("stateError");
+        }
+      }
+
+      window.approveIp = async () => {
+        const btn = document.getElementById("approveBtn");
+        const err = document.getElementById("approveErr");
+        btn.textContent = "Approving..."; btn.disabled = true; err.style.display = "none";
+
+        try {
+          // Sign in to update the document
+          const cred = await signInWithEmailAndPassword(auth, verifiedEmail, verifiedEmail);
+
+          await updateDoc(doc(db, "paid_users", cred.user.uid), {
+            allowedIp:       verifiedNewIp,
+            pendingIpVerify: deleteField()
+          });
+
+          await signOut(auth);
+          showState("stateSuccess");
+
+        } catch (e) {
+          err.textContent = "Could not approve location: " + (e.code || e.message);
+          err.style.display = "block";
+          btn.textContent = "✓ Approve This Location"; btn.disabled = false;
+        }
+      };
+
+      init();
+    </script>
+  </body>
+</html>

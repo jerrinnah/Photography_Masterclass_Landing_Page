@@ -17,8 +17,12 @@ if (!$reference) {
     exit;
 }
 
-require_once __DIR__ . '/config.php';
-$secret_key = PAYSTACK_SECRET_KEY;
+$secret_key = 'YOUR_PAYSTACK_SECRET_KEY'; // ← REPLACE THIS with your real key from dashboard.paystack.com → Settings → API Keys
+
+if ($secret_key === 'YOUR_PAYSTACK_SECRET_KEY') {
+    echo json_encode(['status' => false, 'message' => 'Paystack secret key not configured. Open verify-payment.php and replace YOUR_PAYSTACK_SECRET_KEY.']);
+    exit;
+}
 
 $curl = curl_init();
 curl_setopt_array($curl, [
@@ -54,9 +58,10 @@ if (
         'amount' => ($result['data']['amount'] ?? 0) / 100,
     ]);
 } else {
+    $paystackMsg = $result['message'] ?? 'Payment was not successful or already used';
     echo json_encode([
         'status'  => false,
-        'message' => 'Payment was not successful or already used',
+        'message' => $paystackMsg,
     ]);
 }
 ?>

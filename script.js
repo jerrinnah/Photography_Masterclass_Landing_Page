@@ -437,14 +437,13 @@ const STATS_DATA = [
 // ═══ BRANDS DATA ═══
 // Replace these with your actual brand names. If you have logo image files, swap the icon div for an <img> tag.
 const BRANDS = [
-  { name: "Crocs", color: "#E44311" },
-  { name: "Predator", color: "#004B93" },
-  { name: "Box Office Cinema", color: "#F37021" },
-  { name: "Swatch", color: "#F68B1E" },
-  { name: "PluggedFest", color: "#ED1C24" },
+  { name: "Tommy Hilfiger", color: "#002F6C" },
   { name: "BoleFestival", color: "#FFCC00" },
-  { name: "NDDC", color: "#C8102E" },
-  { name: "Levis", color: "#009639" },
+  { name: "Swatch", color: "#F68B1E" },
+  { name: "Predator Energy", color: "#004B93" },
+  { name: "Crocs", color: "#E44311" },
+  { name: "Levi's", color: "#C8102E" },
+  { name: "Maretl", color: "#8B6F2E" },
 ];
 
 // ═══ SVG ICONS ═══

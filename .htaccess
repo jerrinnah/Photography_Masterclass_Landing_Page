@@ -1,0 +1,31 @@
+# ═══════════════════════════════════════════════════════
+# Clean URLs (no .html extension)
+# ═══════════════════════════════════════════════════════
+
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# 1. Redirect /index or /index.html to / (avoid duplicate URLs)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/+(.+/)?index(\.html)?[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 2. Redirect /foo.html → /foo so the address bar always shows the clean form
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\s/+([^.]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 3. Internally serve /foo as /foo.html when the file exists
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
+RewriteRule ^(.+?)/?$ /$1.html [L]
+
+# ═══════════════════════════════════════════════════════
+# Security headers & defaults
+# ═══════════════════════════════════════════════════════
+
+# Disable directory listings
+Options -Indexes
+
+# Custom error pages (optional — comment out if you don't want them)
+# ErrorDocument 404 /404
