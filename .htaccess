@@ -27,5 +27,13 @@ RewriteRule ^(.+?)/?$ /$1.html [L]
 # Disable directory listings
 Options -Indexes
 
+# Block access to .git/, .htaccess, .gitignore, .htpasswd, etc.
+# When cPanel clones into public_html, the .git folder ends up here
+# and would otherwise be readable at /.git/HEAD, /.git/config, etc.
+RedirectMatch 404 /\.git(/|$)
+<FilesMatch "(^\.|\.example\.|^storage\.rules$|^config\.php$)">
+  Require all denied
+</FilesMatch>
+
 # Custom error pages (optional — comment out if you don't want them)
 # ErrorDocument 404 /404
