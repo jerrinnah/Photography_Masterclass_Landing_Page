@@ -162,7 +162,7 @@
       <!-- Login form -->
       <div id="loginState" style="display:none">
         <h1>Welcome Back</h1>
-        <p class="subtitle">Sign in to access your course</p>
+        <p class="subtitle">Sign in to download your eBook</p>
 
         <div class="reset-success" id="resetSuccess">
           Reset link sent! Check your email inbox.
@@ -181,10 +181,10 @@
         </div>
 
         <div class="error-msg" id="loginError" style="margin-bottom: 12px;"></div>
-        <button class="btn" id="loginBtn" onclick="handleLogin()">Sign In to Course</button>
+        <button class="btn" id="loginBtn" onclick="handleLogin()">Sign In to Download</button>
 
         <div class="divider">—</div>
-        <p class="enrol-link">Don't have access yet? <a href="/">Enrol in the course →</a></p>
+        <p class="enrol-link">Don't have access yet? <a href="/">Get the eBook →</a></p>
       </div>
     </div>
 
@@ -240,15 +240,15 @@
         } catch { return null; }
       }
 
-      // Read optional ?next= redirect target (defaults to "course" so
-      // existing video-course flows are unchanged). The eBook page links
-      // here with ?next=ebook so paid users land on the download.
+      // Read optional ?next= redirect target. Defaults to "ebook" since
+      // the eBook is the active product; the video course flow can be
+      // reached explicitly via ?next=course when it relaunches.
       // Allowlist guards against open-redirect abuse.
       function getNextDestination() {
         const params = new URLSearchParams(window.location.search);
         const next = params.get("next");
         const allowed = ["course", "ebook"];
-        return allowed.includes(next) ? next : "course";
+        return allowed.includes(next) ? next : "ebook";
       }
 
       // If already logged in → go to the requested destination
@@ -330,7 +330,7 @@
                 loginErr.style.color = "#c8a24e";
                 loginErr.innerHTML = `📧 <strong>New location detected.</strong><br>A verification link has been sent to <strong>${email}</strong>. Click the link in your email to approve access from this new location.`;
                 loginErr.style.display = "block";
-                btn.textContent = "Sign In to Course"; btn.disabled = false;
+                btn.textContent = "Sign In to Download"; btn.disabled = false;
                 return;
               }
 
@@ -340,7 +340,7 @@
                 await signOut(auth);
                 loginErr.textContent = "Device limit reached. This account is already active on 2 devices. Contact your instructor to reset access.";
                 loginErr.style.display = "block";
-                btn.textContent = "Sign In to Course"; btn.disabled = false;
+                btn.textContent = "Sign In to Download"; btn.disabled = false;
                 return;
               }
 
@@ -361,7 +361,7 @@
 
           window.location.href = getNextDestination();
         } catch (err) {
-          btn.textContent = "Sign In to Course";
+          btn.textContent = "Sign In to Download";
           btn.disabled    = false;
 
           if (err.code === "auth/user-not-found" || err.code === "auth/wrong-password" || err.code === "auth/invalid-credential") {

@@ -230,7 +230,7 @@
           </div>
         </div>
         <div class="note">Your password is your email address. You can change it anytime from the login page.</div>
-        <button class="btn" onclick="window.location.href='/course'">Go to My Course →</button>
+        <button class="btn" onclick="window.location.href='/ebook'">Download My eBook →</button>
         <p class="redirect-note">Redirecting in <span id="countdown">5</span>s…</p>
       </div>
     </div>
@@ -370,7 +370,7 @@
             n--;
             const el = document.getElementById("countdown");
             if (el) el.textContent = n;
-            if (n <= 0) { clearInterval(timer); window.location.href = "/course"; }
+            if (n <= 0) { clearInterval(timer); window.location.href = "/ebook"; }
           }, 1000);
 
         } catch (err) {
