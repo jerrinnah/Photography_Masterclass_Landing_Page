@@ -1,0 +1,42 @@
+name: Deploy to live server
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allow manual triggering from GitHub Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to cPanel via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Default cPanel FTP serves your home directory; the live site lives in public_html
+          server-dir: public_html/
+          # FTPS (FTP over TLS) on the standard port. Most cPanel hosts support this.
+          # If your host uses something different, change protocol/port here.
+          protocol: ftps
+          port: 21
+          # Only upload changed files (default behaviour). Never delete anything on the
+          # server that isn't in the repo — protects config.php (which is gitignored)
+          # and any backup folders you've placed in public_html.
+          dangerous-clean-slate: false
+          # Files/dirs that exist in the repo but should NOT be deployed
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.DS_Store
+            **/__MACOSX/**
+            **/node_modules/**
+            **/*.md
+            **/*.zip
+            **/config.example.php
+            **/storage.rules
