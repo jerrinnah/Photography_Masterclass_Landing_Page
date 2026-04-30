@@ -860,6 +860,21 @@ body {
   color: #666;
   line-height: 1.5;
 }
+.ebook-login-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #c8a24e;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200, 162, 78, 0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, color 0.2s;
+}
+.ebook-login-link:hover {
+  border-color: #c8a24e;
+  color: #e8c869;
+}
 .ebook-btn {
   display: inline-flex;
   align-items: center;
